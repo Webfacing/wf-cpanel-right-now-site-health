@@ -14,8 +14,18 @@ class SiteHealth extends Plugin {
 		
 		\add_filter( 'site_status_tests', function( array $tests ): array {
 			self::init_data();
+			//var_dump( 'xxxxxxxxxxxxxxxxx',self::$disk_space_max, self::$disk_space_used );
 			if ( self::$disk_space_max && self::$disk_space_used ) {
-				$tests['direct']['disk-space'] = [ 'label' => \__( 'Disk usage', self::$text_domain ), 'test' => [ __CLASS__, 'disk_space_test' ] ];
+				$tests['direct']['disk-space'] = [
+					'label' => \__( 'Disk usage', self::$text_domain ),
+					'test'  => [ __CLASS__, 'disk_space_test' ]
+				];
+			}
+			if ( \str_starts_with( get_home_url(), 'https://' ) ) {
+				$tests['direct']['https-only'] = [
+					'label' => \__( 'HTTPS only', self::$text_domain ),
+					'test'  => [ __CLASS__, 'https_only_test' ]
+				];
 			}
 			return $tests;
 		} );
@@ -26,25 +36,25 @@ class SiteHealth extends Plugin {
 			$debug_info[ self::$text_domain ] = [
 				'label'  => \__( 'Disk Space', self::$text_domain ),
 				'fields' => [
-					'max_space'   => self::$disk_space_max ? [ 'label' => \__( 'Max space', self::$text_domain ),
-						'value' => \size_format( self::$disk_space_max,  0 ),
+					'max_space'   => [ 'label' => \__( 'Max space', self::$text_domain ),
+						'value' => self::$disk_space_max  ? \size_format( self::$disk_space_max,  0 ) : 'N/A',
 						'private' => false,
-					] : null,
-					'used_space'  => self::$disk_space_used ? [
+					],
+					'used_space'  => [
 						'label' => \__( 'Used space &ndash; total', self::$text_domain ),
-						'value' => \size_format( self::$disk_space_used, 1 ),
+						'value' => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A',
 						'private' => false,
-					] : null,
-					'upload_used' => self::$uploads_used ? [
+					],
+					'upload_used' => [
 						'label' => \__( ' &ndash; Uploaded files', self::$text_domain ),
-						'value' => \size_format( self::$uploads_used,    1 ),
+						'value' => is_null( self::$uploads_used ) ? 'N/A' : \size_format( self::$uploads_used, 1 ),
 						'private' => false,
-					] : null,
-					'email_used' => self::$is_cpanel ? [
+					],
+					'email_used' => [
 						'label' => \__( ' &ndash; Emails', self::$text_domain ),
-						'value' => \size_format( self::$emails_used,     1 ),
+						'value' => self::$is_cpanel       ? \size_format( self::$emails_used,     1 ) : 'N/A',
 						'private' => false,
-					] : null,
+					],
 					'cpanel'      => [ 'label' => \__( 'Is cPanel?', self::$text_domain ),
 						'value' => self::$is_cpanel ? \__( 'Yes' ) : \__( 'No' ),
 						'private' => false,
@@ -56,22 +66,6 @@ class SiteHealth extends Plugin {
 				],
 			];
 			return $debug_info;
-		} );
-
-		\add_filter( 'site_status_test_result', function( array $site_health_check ): array {
-			if ( ( $site_health_check['test'] ?? '' ) === 'https_status' ) {
-				if ( $site_health_check['status'] === 'good' ) {
-					$result = wp_remote_get( get_home_url( '/', 'http' ), [ 'method' => 'HEAD' ] );
-					$status = intval( wp_remote_retrieve_response_code( $result ) );
-					if ( intval( $status / 100 ) === 2 ) {
-						$title = \__( 'Force all traffic to your site to use https', self::$text_domain ) . ' - ' . self::$host_label . '.';
-						$url   = \__( 'https://www.proisp.eu/guides/force-https-domain/', self::$text_domain );
-						$tip   = \__( 'Opens in a new tab.', self::$text_domain );
-						$site_health_check['actions'] .= sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s">%3$s', $url, $tip, $title ) . '<span class="dashicons dashicons-external" aria-hidden="true"></span></a>';
-					}
-				}
-			}
-			return $site_health_check;
 		} );
 	}
 	
@@ -92,7 +86,7 @@ class SiteHealth extends Plugin {
 			$result['status' ] = 'recommended';
 			$result['badge'  ]['color'] = 'orange';
 			$result['description'] .= \wpautop( \__( 'You are advised to inspect your server or consult your host for further advice or upgrade.', self::$text_domain ) . '%s' );
-			$result['description']  = \str_replace( '%s', self::$is_cpanel ? ' ' . \__( 'See links below.', self::$text_domain ) : '', $result['description'] );
+			$result['description'] = \str_replace( '%s', self::$is_cpanel ? ' ' . \__( 'See links below.', self::$text_domain ) : '', $result['description'] );
 		}
 		if ( self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ) {
 			$result['label'  ] = \__( 'You are very close to reaching the quota on your server', self::$text_domain );
@@ -100,6 +94,34 @@ class SiteHealth extends Plugin {
 			$result['badge'  ]['color'] = 'red';
 			$result['actions'] .= ' &nbsp; | &nbsp; <mark>' . \__( 'Immediate action is necessary to keep normal site behaviour, and to allow for new content.', self::$text_domain ) . '</mark>';
 		}
+		return $result;
+	}
+
+	public    static function https_only_test(): array {
+		$result = [
+			'label'       => \__( 'Your site only accepts secure requests (https).', self::$text_domain ),
+			'status'      => 'good',
+			'badge'       => [
+				'label'   => \__( 'HTTPS only', self::$text_domain ),
+				'color'   => 'blue',
+			],
+			'description' => \wpautop( \__( 'You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn\'t handle sensitive data, it\'s a good idea to make sure your website always loads securely over https. This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below.', self::$text_domain ) ),
+			'actions'     => '',
+//			'test'        => null,	// ?
+		];
+		$home_url = \get_home_url( null, '/', 'http' );
+		$response = \wp_remote_get( $home_url, [ 'method' => 'HEAD', 'redirection' => 0 ] );
+		$status = \intval( \wp_remote_retrieve_response_code( $response ) );
+		if ( \intval( $status / 100 ) === 2 ) {
+			$result['description'] .= \wpautop( \sprintf( \__('Response status for \'%1$s\' is %2$s.', self::$text_domain ), $home_url, $status ) );
+			$result['label'  ] = \__( 'Your site also accepts insecure requests (http).', self::$text_domain );
+			$result['status' ] = 'recommended';
+			$text = \__( 'Force all traffic to your site to use https', self::$text_domain ) . ( self::$host_label ? ' - ' . self::$host_label : '' ) . '.';
+			$url  = self::$is_cpanel ? \__( 'https://www.proisp.eu/guides/force-https-domain/', self::$text_domain ) : \__( 'https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https', self::$text_domain  );
+			$tip  = \__( 'Opens in a new tab.', self::$text_domain );
+			$result['actions'] .= sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s">%3$s', $url, $tip, $text ) . '<span class="dashicons dashicons-external" aria-hidden="true"></span></a>';
+		}
+
 		return $result;
 	}
 }

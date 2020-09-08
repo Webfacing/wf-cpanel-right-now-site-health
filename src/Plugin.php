@@ -133,7 +133,6 @@ abstract class Plugin {
 
 		$host_ids = \explode( '.', self::$host_name ?? '' );
 		$num_f = \count( $host_ids );
-//		$host_id  = \array_key_exists( $num_f - 1, $host_ids ) ? $host_ids[ $num_f - 2] . '.' . $host_ids[ $num_f - 1] : false;
 		self::$host_id       = \array_key_exists( $num_f - 1, $host_ids ) ? $host_ids[ $num_f - 2] . '.' . $host_ids[ $num_f - 1] : null;
 		
 		self::$hosts = \apply_filters( self::pf . 'hosts', self::hosts ) ?? self::hosts;
@@ -160,23 +159,27 @@ abstract class Plugin {
 
 		self::$limits = \apply_filters( self::pf . 'limits', self::limits ) ?? self::limits;
 
-		self::$uploads_used = 1024 * \intval( \exec( 'cd ' . \wp_upload_dir()['basedir'] . ';du -sh' ) );
+		self::$uploads_used = 1024 * \intval( \exec( 'du -sh ' . \wp_upload_dir()['basedir'] ) );
 
-		self::$emails_used  = 1024 * \intval( \exec( 'cd ' . $root . self::$cpanel_user . '/mail;du -sh' ) );
+		self::$emails_used  = 1024 * \intval( \exec( 'du -sh ' . $root . self::$cpanel_user . '/mail' ) );
 	}
 
 	protected static function get_disk_space_used(): ?int {
+		$results = $GLOBALS['wpdb']->get_results( 'SELECT SUM( data_length + index_length ) AS b FROM information_schema.tables' );
+		$result  = \array_key_exists( 0, $results ) ? $results[0] : null;
+		$result  = \is_object( $result ) && \property_exists( $result, 'b' ) ? $result->b : null;
+		$used    = $result ? \intval( $result ) : 0;
 		if ( \is_array( self::$cpanel_quotas ) && \array_key_exists( 0, self::$cpanel_quotas ) ) {
-			$used  = self::$cpanel_quotas[0];
-			$results = $GLOBALS['wpdb']->get_results( 'SELECT SUM( data_length + index_length ) AS b FROM information_schema.tables' );
-			$result  = \array_key_exists( 0, $results ) ? $results[0] : null;
-			$result  = \is_object( $result ) && \property_exists( $result, 'b' ) ? $result->b : null;
-			$used   += $result ? \intval( $result ) : 0;
+			$used  += self::$cpanel_quotas[0];
 		} else {
-			$used = null;
+			$du = \shell_exec( 'du -sh ' . \ABSPATH );
+			if ( $du ) { 
+				$used += 1024 * \intval( $du );
+			} else {
+				$used = null;
+			}
 		}
 		$used = \defined( '\WF_DEBUG' ) && \WF_DEBUG && \defined( '\WP_DEBUG' ) && \WP_DEBUG && \defined( '\WP_LOCAL_DEV' ) && \WP_LOCAL_DEV && self::$me->ID === \get_current_user_id() && self::rnd ? \rand( self::rnd / 1.25, self::rnd ) : $used;
 		return $used;
 	}
-
 }
