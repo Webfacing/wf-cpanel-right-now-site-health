@@ -3,7 +3,7 @@
 ## This plugin adds the following
 ### Dashboard - Right Now (widget)
  * One item showing used disk space (on a cPanel kontrolled server only)
- * A sentence mentioning name of web hosting provider and maximum disk space (on PRO ISP only)
+ * A widget footer line mentioning name of web hosting provider, and maximum disk space for current plan/account (on PRO ISP only)
 ### Tools - Site Health panels
 #### Status (tab)
  * A disk space check with explaining text and possible actions (cPanel only) with following results
@@ -21,3 +21,8 @@
      * &ndash; Disk space used by mail
  * Adds one line to the WordPress Constant values section
    * WF_DEBUG
+## Known limitations
+ * The amoumt of used disk space reored will not include other databases than the currently used the WordPress site. The reorted value nay be too low in such cases.
+ * This plugin will not repor much if site is not on a cPanel managed server, but will test for hHTTPS only.
+ * This plugin is written for PHP 7.4 or newer, and for WordPress 5.4 or newer.
+ 
