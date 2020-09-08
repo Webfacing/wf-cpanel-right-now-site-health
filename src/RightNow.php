@@ -12,19 +12,22 @@ class RightNow extends Plugin {
 
 	public    static function init() {
 
-		\add_filter( 'dashboard_glance_items', function ( array $elements ): array {
-
+		\add_filter( 'dashboard_glance_items', function ( ?array $elements ): array {
+			
+			$elements = $elements ?? [];
 			self::init_data();
-			$class = self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ?
-				'critical' : (
-				self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ?
-					'recommended' :
-					'good'
-				)
-			;
-			$title = self::$is_cpanel ? ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), self::$cpanel_user, \size_format( self::$disk_space_max ) ) . ' ' . \sprintf( \__( 'Your uploaded files is %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) . '"' : '';			
-			$href = self::$is_cpanel ? ' href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '"' : '';
-			$elements[] = '<a ' . $href . 'class="disk-count ' . $class . '"' . $title . '>' . \size_format( self::$disk_space_used, 1 ) . ' ' . \__( 'disk space used', self::$text_domain ) . '</a>';
+			if ( self::$disk_space_used && self::$disk_space_max ) {
+				$class = self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ?
+					'critical' : (
+					self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ?
+						'recommended' :
+						'good'
+					)
+				;
+				$title = self::$is_cpanel ? ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), self::$cpanel_user, \size_format( self::$disk_space_max ) ) . ( self::$uploads_used ?  ' ' . \sprintf( \__( 'Your uploaded files is %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) : '' ) . '"' : '';			
+				$href = self::$is_cpanel ? ' href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '"' : '';
+				$elements[] = '<a ' . $href . 'class="disk-count ' . $class . '"' . $title . '>' . \size_format( self::$disk_space_used, 1 ) . ' ' . \__( 'disk space used', self::$text_domain ) . '</a>';
+			}
 			return $elements;
 		}, 19 );
 		

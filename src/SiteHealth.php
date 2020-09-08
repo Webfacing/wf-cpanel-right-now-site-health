@@ -14,7 +14,9 @@ class SiteHealth extends Plugin {
 		
 		\add_filter( 'site_status_tests', function( array $tests ): array {
 			self::init_data();
-			$tests['direct']['disk-space'] = [ 'label' => \__( 'Disk usage', self::$text_domain ), 'test' => [ __CLASS__, 'disk_space_test' ] ];
+			if ( self::$disk_space_max && self::$disk_space_used ) {
+				$tests['direct']['disk-space'] = [ 'label' => \__( 'Disk usage', self::$text_domain ), 'test' => [ __CLASS__, 'disk_space_test' ] ];
+			}
 			return $tests;
 		} );
 	
@@ -24,20 +26,20 @@ class SiteHealth extends Plugin {
 			$debug_info[ self::$text_domain ] = [
 				'label'  => \__( 'Disk Space', self::$text_domain ),
 				'fields' => [
-					'max_space'   => [ 'label' => \__( 'Max space', self::$text_domain ),
+					'max_space'   => self::$disk_space_max ? [ 'label' => \__( 'Max space', self::$text_domain ),
 						'value' => \size_format( self::$disk_space_max,  0 ),
 						'private' => false,
-					],
-					'used_space'  => [
+					] : null,
+					'used_space'  => self::$disk_space_used ? [
 						'label' => \__( 'Used space &ndash; total', self::$text_domain ),
 						'value' => \size_format( self::$disk_space_used, 1 ),
 						'private' => false,
-					],
-					'upload_used' => [
+					] : null,
+					'upload_used' => self::$uploads_used ? [
 						'label' => \__( ' &ndash; Uploaded files', self::$text_domain ),
 						'value' => \size_format( self::$uploads_used,    1 ),
 						'private' => false,
-					],
+					] : null,
 					'email_used' => self::$is_cpanel ? [
 						'label' => \__( ' &ndash; Emails', self::$text_domain ),
 						'value' => \size_format( self::$emails_used,     1 ),
@@ -81,7 +83,7 @@ class SiteHealth extends Plugin {
 				'label'   => \__( 'Disk Usage', self::$text_domain ),
 				'color'   => 'blue',
 			],
-			'description' => \wpautop( \sprintf( \__( 'In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher "garbage" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s.', self::$text_domain ), \size_format( self::$disk_space_used, 1 ), \size_format( self::$disk_space_max ), \size_format( self::$uploads_used, 1 ) ) ),
+			'description' => \wpautop( \sprintf( \__( 'In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher "garbage" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s.', self::$text_domain ), self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A', self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A', self::$uploads_used ? \size_format( self::$uploads_used, 1 ) : 'N/A' ) ),
 			'actions'     => ( self::$is_cpanel ? '<a href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '">' . \__( 'Your cPanel Server', self::$text_domain ) . '</a>' : '' ) . ( self::$host_label ? ( self::$host_url ? ' &nbsp; | &nbsp; <a href="' . self::$host_url . '">' : '' ) . self::$host_label . ( self::$host_url ? '</a>' : '' ) : '' ),
 //			'test'        => null,	// ?
 		];
