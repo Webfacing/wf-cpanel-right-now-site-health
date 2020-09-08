@@ -21,6 +21,13 @@
      * &ndash; Disk space used by mail
  * Adds one line to the WordPress Constant values section
    * WF_DEBUG
+## Debug and simulation setting
+To simulate high disk space utilization, report fictional, random high results close to upper limit, add all these lines to your `wp-config.php` or in another plugin:
+```
+const WP_DEBUG = true;
+const WP_LOCAL_DEV = true;
+const WF_DEBUG = true;
+```
 ## Known limitations
  * The amoumt of used disk space reported will not include space taken by other databases than the site's own WordPress database. The reported value may therefore be inaccurate or too low in some cases (accounts with more databases of any type).
  * This plugin will probably not report much if the site is not on a cPanel managed server, but will do the test for HTTPS only.
