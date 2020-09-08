@@ -7,17 +7,17 @@
 ### Tools - Site Health panels
 #### Status (tab)
  * A disk space check with explaining text and possible actions (cPanel only) with following results
-  * Good (less than 90%)
-  * Recommended (over 90%, but less than 95%)
-  * Critical (over 95%)
+   * Good (less than 90%)
+   * Recommended (over 90%, but less than 95%)
+   * Critical (over 95%)
  * A HTTPS only test wih explaining text (when HTTPS is set as home URL only), actions with link to relevant resources and help (special link for PRO ISP), and with the following results
   * Good (http requests are rejected)
   * Recommended (http requsts return status 2xx)
 #### Info (tab)
  * A disk space section containing (cPanel only)
-  * Max disk space available
-  * Total disk space used
-   * &ndash; Disk used by media files
-   * &ndash; Disk space used by mail
+   * Max disk space available
+   * Total disk space used
+    * &ndash; Disk used by media files
+     * &ndash; Disk space used by mail
  * Adds one line to the WordPress Constant values section
-  * WF_DEBUG
+   * WF_DEBUG
