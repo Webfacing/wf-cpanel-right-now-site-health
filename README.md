@@ -21,6 +21,8 @@
      * &ndash; Disk space used by mail
  * Adds one line to the WordPress Constant values section
    * WF_DEBUG
+## Translation ready, ready translations are
+ * Norwegian (bokmål)
 ## Debug and simulation setting
 To simulate high disk space utilization, report fictional, random high results close to upper limit, add all these lines to your `wp-config.php` or in another plugin:
 ```
