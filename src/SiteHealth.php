@@ -79,20 +79,20 @@ class SiteHealth extends Plugin {
 			],
 			'description' => \wpautop( \sprintf( \__( 'In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher "garbage" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s.', self::$text_domain ), self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A', self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A', self::$uploads_used ? \size_format( self::$uploads_used, 1 ) : 'N/A' ) ),
 			'actions'     => ( self::$is_cpanel ? '<a href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '">' . \__( 'Your cPanel Server', self::$text_domain ) . '</a>' : '' ) . ( self::$host_label ? ( self::$host_url ? ' &nbsp; | &nbsp; <a href="' . self::$host_url . '">' : '' ) . self::$host_label . ( self::$host_url ? '</a>' : '' ) : '' ),
-//			'test'        => null,	// ?
+			'test'        => 'disk-space',
 		];
 		if ( self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ) {
-			$result['label'  ] = \__( 'You are close to reaching the quota on your server', self::$text_domain );
-			$result['status' ] = 'recommended';
+			$result['label'  ]      = \__( 'You are close to reaching the quota on your server', self::$text_domain );
+			$result['status' ]      = 'recommended';
 			$result['badge'  ]['color'] = 'orange';
 			$result['description'] .= \wpautop( \__( 'You are advised to inspect your server or consult your host for further advice or upgrade.', self::$text_domain ) . '%s' );
-			$result['description'] = \str_replace( '%s', self::$is_cpanel ? ' ' . \__( 'See links below.', self::$text_domain ) : '', $result['description'] );
+			$result['description']  = \str_replace( '%s', self::$is_cpanel ? ' ' . \__( 'See links below.', self::$text_domain ) : '', $result['description'] );
 		}
 		if ( self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ) {
-			$result['label'  ] = \__( 'You are very close to reaching the quota on your server', self::$text_domain );
-			$result['status' ] = 'critical';
+			$result['label'  ]      = \__( 'You are very close to reaching the quota on your server', self::$text_domain );
+			$result['status' ]      = 'critical';
 			$result['badge'  ]['color'] = 'red';
-			$result['actions'] .= ' &nbsp; | &nbsp; <mark>' . \__( 'Immediate action is necessary to keep normal site behaviour, and to allow for new content.', self::$text_domain ) . '</mark>';
+			$result['actions']     .= ' &nbsp; | &nbsp; <mark>' . \__( 'Immediate action is necessary to keep normal site behaviour, and to allow for new content.', self::$text_domain ) . '</mark>';
 		}
 		return $result;
 	}
@@ -107,21 +107,21 @@ class SiteHealth extends Plugin {
 			],
 			'description' => \wpautop( \__( 'You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn\'t handle sensitive data, it\'s a good idea to make sure your website always loads securely over https. This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below.', self::$text_domain ) ),
 			'actions'     => '',
-//			'test'        => null,	// ?
+			'test'        => 'https-only',
 		];
 		$home_url = \get_home_url( null, '/', 'http' );
 		$response = \wp_remote_get( $home_url, [ 'method' => 'HEAD', 'redirection' => 0 ] );
 		$status = \intval( \wp_remote_retrieve_response_code( $response ) );
 		if ( \intval( $status / 100 ) === 2 ) {
 			$result['description'] .= \wpautop( \sprintf( \__('Response status for \'%1$s\' is %2$s.', self::$text_domain ), $home_url, $status ) );
-			$result['label'  ] = \__( 'Your site also accepts insecure requests (http).', self::$text_domain );
-			$result['status' ] = 'recommended';
+			$result['label'  ]      = \__( 'Your site also accepts insecure requests (http).', self::$text_domain );
+			$result['status' ]      = 'recommended';
+			$result['badge'  ]['color'] = 'orange';
 			$text = \__( 'Force all traffic to your site to use https', self::$text_domain ) . ( self::$host_label ? ' - ' . self::$host_label : '' ) . '.';
 			$url  = self::$is_cpanel ? \__( 'https://www.proisp.eu/guides/force-https-domain/', self::$text_domain ) : \__( 'https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https', self::$text_domain  );
 			$tip  = \__( 'Opens in a new tab.', self::$text_domain );
-			$result['actions'] .= sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s">%3$s', $url, $tip, $text ) . '<span class="dashicons dashicons-external" aria-hidden="true"></span></a>';
+			$result['actions']     .= sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s">%3$s', $url, $tip, $text ) . '<span class="dashicons dashicons-external" aria-hidden="true"></span></a>';
 		}
-
 		return $result;
 	}
 }

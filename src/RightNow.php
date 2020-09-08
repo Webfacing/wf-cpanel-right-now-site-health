@@ -34,9 +34,12 @@ class RightNow extends Plugin {
 		\add_action( 'rightnow_end', function() {
 			$disk_space_max = \size_format( self::$disk_space_max );
 			$proisp_packages = [
-				  '1 GB' => 'Start',
-				 '30 GB' => 'Medium',
-				'100 GB' => 'Premium',
+				         '1 GB' => 'Start',
+				        '30 GB' => 'Medium',
+				       '100 GB' => 'Premium',
+				      '1000 MB' => 'Start',
+				     '1 000 MB' => 'Start',
+				'1&nbsp;000 MB' => 'Start',
 			];
 			$proisp_package  = self::$is_proisp ? 'Pro&nbsp;' . $proisp_packages[ $disk_space_max ] : '';
 			if ( self::$host_label ) {
