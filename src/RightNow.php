@@ -29,7 +29,7 @@ class RightNow extends Plugin {
 				$elements[] = '<a ' . $href . 'class="disk-count ' . $class . '"' . $title . '>' . \size_format( self::$disk_space_used, 1 ) . ' ' . \__( 'disk space used', self::$text_domain ) . '</a>';
 			}
 			return $elements;
-		}, 19 );
+		}, 100 );
 		
 		\add_action( 'rightnow_end', function() {
 			$disk_space_max = \size_format( self::$disk_space_max );
