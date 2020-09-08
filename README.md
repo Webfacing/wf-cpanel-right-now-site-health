@@ -33,4 +33,4 @@ const WF_DEBUG = true;
 ## Known limitations
  * The amoumt of used disk space reported will not include space taken by other databases than the site's own WordPress database. The reported value may therefore be inaccurate or too low in some cases (accounts with more databases of any type).
  * This plugin will probably not report much if the site is not on a cPanel managed server, but will do the test for HTTPS only.
- * This plugin is written for **PHP 7.4** and later, and for WordPress 5.4 and later. It's namespaced, static classes and uses typed class properties.
+ * This plugin is written for **PHP 7.4** and later, and for WordPress 5.4 and later. It's namespaced, has static classes and uses typed class properties.
