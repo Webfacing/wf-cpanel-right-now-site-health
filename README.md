@@ -17,7 +17,7 @@
  * A disk space section containing (cPanel only)
   * Max disk space available
   * Total disk space used
-   * - Disk used by media files
-   * - Disk space used by mail
+   * &ndash; Disk used by media files
+   * &ndash; Disk space used by mail
  * Adds one line to the WordPress Constant values section
   * WF_DEBUG
