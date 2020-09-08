@@ -159,9 +159,9 @@ abstract class Plugin {
 
 		self::$limits = \apply_filters( self::pf . 'limits', self::limits ) ?? self::limits;
 
-		self::$uploads_used = convertToBytes( explode( "\t", \exec( 'du -sh ' . \wp_upload_dir()['basedir'] ) )[0] . 'B' );
+		self::$uploads_used = \convertToBytes( \explode( "\t", \exec( 'du -sh ' . \wp_upload_dir()['basedir'] ) )[0] . 'B' );
 
-		self::$emails_used  = convertToBytes( explode( "\t", \exec( 'du -sh ' . $root . self::$cpanel_user . '/mail' ) )[0] . 'B' );
+		self::$emails_used  = \convertToBytes( \explode( "\t", \exec( 'du -sh ' . $root . self::$cpanel_user . '/mail' ) )[0] . 'B' );
 	}
 
 	protected static function get_disk_space_used(): ?int {

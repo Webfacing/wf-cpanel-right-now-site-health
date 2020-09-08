@@ -1,5 +1,6 @@
 <?php
 function convertToBytes( string $from ): ?int {
+	str_replace( 'BB', 'B', $from );
     $units = [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB' ];
     $number = substr( $from, 0, -2);
     $suffix = strtoupper( substr( $from, -2 ) );
