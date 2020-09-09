@@ -62,6 +62,8 @@ abstract class Plugin {
 
 	protected static ?array     $cpanel_quotas;
 
+	protected static bool       $cpanel_quotas_fresh;
+
 	protected static ?int       $disk_space_max;
 
 	protected static ?int       $disk_space_used;
@@ -156,7 +158,21 @@ abstract class Plugin {
 		$cpanel_users = \explode( '/', \ABSPATH );
 		self::$cpanel_user   = \array_key_exists( 2, $cpanel_users ) ? $cpanel_users[2] : null;
 		
-		self::$cpanel_quotas = self::$cpanel_user ? ( ( \json_decode( \file_get_contents( $root . self::$cpanel_user . '/.cpanel/datastore/_Cpanel::Quota.pm__' . self::$cpanel_user ))->data ) ?? null ) : null;
+		self::$cpanel_quotas = self::$cpanel_user ? ( ( \json_decode( \file_get_contents( $root . self::$cpanel_user . '/.cpanel/datastore/_Cpanel::Quota.pm__' . self::$cpanel_user ) )->data ) ?? null ) : null;
+
+		$transient_name = self::pf . 'cpanel_quotas';
+		if ( \is_array( self::$cpanel_quotas )            &&
+			 \array_key_exists( 1, self::$cpanel_quotas ) &&
+			 \array_key_exists( 1, self::$cpanel_quotas ) &&
+			 ! empty( self::$cpanel_quotas[0] )           &&
+			 ! empty( self::$cpanel_quotas[1] )           &&
+		true ) {
+			self::$cpanel_quotas_fresh = true;
+			\set_transient( $transient_name, self::$cpanel_quotas, YEAR_IN_SECONDS );
+		} else {
+			self::$cpanel_quotas = \get_transient( $transient_name );
+			self::$cpanel_quotas_fresh = false;
+		}
 
 		self::$disk_space_used = self::get_disk_space_used();
 

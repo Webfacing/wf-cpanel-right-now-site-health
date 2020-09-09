@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cPanel Disk Usage in Site Health & Right Now\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-08 14:47+0000\n"
-"PO-Revision-Date: 2020-09-08 15:00+0000\n"
+"POT-Creation-Date: 2020-09-09 23:29+0000\n"
+"PO-Revision-Date: 2020-09-09 23:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: Norsk bokmål\n"
 "Language: nb_NO\n"
@@ -15,8 +15,9 @@ msgstr ""
 "X-Loco-Version: 2.4.3; wp-5.5.1"
 
 #. Name of the plugin
-msgid "cPanel Disk Usage in Site Health & Right Now"
-msgstr "cPanel diskbruk i Nettstedshelse og Oversikt"
+#| msgid "cPanel Disk Usage in Site Health & Right Now"
+msgid "cPanel® Disk Usage in Site Health & Right Now"
+msgstr "cPanel® diskbruk i Nettstedshelse og Oversikt"
 
 #. Author URI of the plugin
 msgid "https://profiles.wordpress.org/knutsp/"
@@ -144,8 +145,9 @@ msgstr "lagringsplass brukt"
 msgid "Disk Usage"
 msgstr "Datalagring"
 
-msgid "Is cPanel?"
-msgstr "Er på cPanel?"
+#| msgid "Is cPanel?"
+msgid "Is cPanel&reg;?"
+msgstr "Er på cPanel&reg;?"
 
 msgid " &ndash; Emails"
 msgstr " &ndash; E-poster"
@@ -182,3 +184,6 @@ msgstr "Ditt nettsted aksepterer bare sikre forespørsler (https)."
 
 msgid "HTTPS only"
 msgstr "Kun HTTPS"
+
+msgid "Is cPanel&reg; data fresh?"
+msgstr "Er cPanel&reg;-data ferske?"

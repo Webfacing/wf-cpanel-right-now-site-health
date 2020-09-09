@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cPanel Disk Usage in Site Health & Right Now\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-08 14:47+0000\n"
+"POT-Creation-Date: 2020-09-09 23:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.4.3; wp-5.5.1"
 
 #. Name of the plugin
-msgid "cPanel Disk Usage in Site Health & Right Now"
+msgid "cPanel® Disk Usage in Site Health & Right Now"
 msgstr ""
 
 #. Author URI of the plugin
@@ -124,7 +124,7 @@ msgstr ""
 msgid "Disk Usage"
 msgstr ""
 
-msgid "Is cPanel?"
+msgid "Is cPanel&reg;?"
 msgstr ""
 
 msgid " &ndash; Emails"
@@ -136,9 +136,9 @@ msgid ""
 "an old link or bookmark, or just typed in the domain. Using https instead of "
 "https means that communications between your browser and a website is "
 "encrypted via the use of TLS (Transport Layer Security). Even if your "
-"website doesn't handle sensitive data, it's a good idea to make sure "
-"your website always loads securely over https. This situation can and should "
-"be fixed by forwarding all http requests to a https version of the requested "
+"website doesn't handle sensitive data, it's a good idea to make sure your "
+"website always loads securely over https. This situation can and should be "
+"fixed by forwarding all http requests to a https version of the requested "
 "URL. See link below."
 msgstr ""
 
@@ -152,4 +152,7 @@ msgid "Your site only accepts secure requests (https)."
 msgstr ""
 
 msgid "HTTPS only"
+msgstr ""
+
+msgid "Is cPanel&reg; data fresh?"
 msgstr ""

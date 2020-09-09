@@ -36,35 +36,42 @@ class SiteHealth extends Plugin {
 			$debug_info[ self::$text_domain ] = [
 				'label'  => \__( 'Disk Space', self::$text_domain ),
 				'fields' => [
-					'max_space'   => [ 'label' => \__( 'Max space', self::$text_domain ),
-						'value' => self::$disk_space_max  ? \size_format( self::$disk_space_max,  0 ) : 'N/A',
-						'private' => false,
+					'max_space'    => [ 'label' => \__( 'Max space', self::$text_domain ),
+						'value'    => self::$disk_space_max  ? \size_format( self::$disk_space_max,  0 ) : 'N/A',
+						'private'  => false,
 					],
-					'used_space'  => [
-						'label' => \__( 'Used space &ndash; total', self::$text_domain ),
-						'value' => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A',
-						'private' => false,
+					'used_space'   => [
+						'label'    => \__( 'Used space &ndash; total', self::$text_domain ),
+						'value'    => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A',
+						'private'  => false,
 					],
-					'upload_used' => [
-						'label' => \__( ' &ndash; Uploaded files', self::$text_domain ),
-						'value' => is_null( self::$uploads_used ) ? 'N/A' : \size_format( self::$uploads_used, 1 ),
-						'private' => false,
+					'upload_used'  => [
+						'label'    => \__( ' &ndash; Uploaded files', self::$text_domain ),
+						'value'    => is_null( self::$uploads_used ) ? 'N/A' : \size_format( self::$uploads_used, 1 ),
+						'private'  => false,
 					],
-					'email_used' => [
-						'label' => \__( ' &ndash; Emails', self::$text_domain ),
-						'value' => self::$is_cpanel       ? \size_format( self::$emails_used,     1 ) : 'N/A',
-						'private' => false,
+					'email_used'   => [
+						'label'    => \__( ' &ndash; Emails', self::$text_domain ),
+						'value'    => self::$is_cpanel       ? \size_format( self::$emails_used,     1 ) : 'N/A',
+						'private'  => false,
 					],
-					'cpanel'      => [ 'label' => \__( 'Is cPanel?', self::$text_domain ),
-						'value' => self::$is_cpanel ? \__( 'Yes' ) : \__( 'No' ),
-						'private' => false,
+					'cpanel'       => [ 'label' => \__( 'Is cPanel&reg;?', self::$text_domain ),
+						'value'    => self::$is_cpanel ? \__( 'Yes' ) : \__( 'No' ),
+						'private'  => false,
 					],
-					'proisp'      => [ 'label' => \__( 'At PRO ISP?', self::$text_domain ),
-						'value' => self::$is_proisp ? \__( 'Yes' ) : \__( 'No' ),
-						'private' => true,
+					'cpanel_fresh' => [ 'label' => \__( 'Is cPanel&reg; data fresh?', self::$text_domain ),
+						'value'    => self::$cpanel_quotas_fresh ? \__( 'Yes' ) : \__( 'No' ),
+						'private'  => false,
+					],
+					'proisp'       => [ 'label' => \__( 'At PRO ISP?', self::$text_domain ),
+						'value'    => self::$is_proisp ? \__( 'Yes' ) : \__( 'No' ),
+						'private'  => true,
 					],
 				],
 			];
+			if ( ! self::$is_cpanel ) {
+				unset ( $debug_info[ self::$text_domain ]['fields']['cpanel_fresh'] );
+			}
 			return $debug_info;
 		} );
 	}
