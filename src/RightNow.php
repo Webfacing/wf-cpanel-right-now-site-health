@@ -34,6 +34,7 @@ class RightNow extends Plugin {
 		\add_action( 'rightnow_end', function() {
 			$disk_space_max = \size_format( self::$disk_space_max );
 			$proisp_packages = [
+				              0 => \__('Unknown', self::$text_domain ),
 				         '1 GB' => 'Start',
 				        '30 GB' => 'Medium',
 				       '100 GB' => 'Premium',
@@ -44,7 +45,7 @@ class RightNow extends Plugin {
 			$proisp_package  = self::$is_proisp ? 'Pro&nbsp;' . $proisp_packages[ $disk_space_max ] : '';
 			if ( self::$host_label ) {
 				if ( self::$is_proisp ) {
-					echo PHP_EOL, \wpautop( \sprintf( \__( 'Hosted at <a href="%1$s">%2$s</a> using a <strong>%3$s</strong> account with %4$s.', self::$text_domain ), self::$host_url, self::$host_label, $proisp_package, \size_format( self::$disk_space_max ) ) );
+					echo PHP_EOL, \wpautop( \sprintf( \__( 'Hosted at <a href="%1$s">%2$s</a> using a <strong>%3$s</strong> account with %4$s.', self::$text_domain ), self::$host_url, self::$host_label, $proisp_package, self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A' ) );
 				} elseif ( self::$is_known_isp ) {
 					echo PHP_EOL, \wpautop( \sprintf( \__( 'Hosted at <a href="%1$s">%2$s</a>.', self::$text_domain ), self::$host_url, self::$host_label ) );
 				}
