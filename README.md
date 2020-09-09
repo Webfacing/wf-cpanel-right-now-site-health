@@ -1,5 +1,5 @@
 # cPanel Disk Usage, HTTPS only check in Site Health &amp; Right Now Dash - for WordPress
-🕸️ By WebFacing. Shows disk usage information, recommendations and alerts in your admin Dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only (http should not be allowed, but forwarded to https) with information about the issue, recommendation and actions. Made with a little help from [PRO ISP AS, Norway](https://proisp.eu/) - many thanks.
+🕸️ By WebFacing. Shows disk usage information, recommendations and alerts in your admin Dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only (http should not be allowed, but forwarded to https) with information about the issue, recommendation and actions. Made with a little help from [cPanel](http://www.cpanel.net/) and [PRO ISP AS, Norway](https://proisp.eu/) - many thanks.
 ## This plugin adds the following
 ### Dashboard - Right Now (widget)
  * One item showing used disk space (on a cPanel kontrolled server only)
