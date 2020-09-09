@@ -86,6 +86,11 @@ abstract class Plugin {
 		$tx = self::$text_domain;
 
 		self::$pf              = \trim( \str_replace( '_', '-', self::pf ) );
+
+		\add_action( 'plugins_loaded', function() {
+			\load_plugin_textdomain( self::$text_domain, false, self::$domain_path );
+		} );
+		
 		\add_action( 'init', function() {
 			$bits = \explode( '/', \rtrim( self::$plugin_data['AuthorURI'], ' /' ) );
 			self::$me = \get_user_by( 'login', \end( $bits ) ) ?: null;
