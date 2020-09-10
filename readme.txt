@@ -2,10 +2,10 @@
 Contributors: knutsp
 Donate link: https://webfacing.eu/
 Tags: disk-space, security, https-only, isp
-Requires at least: 5.4.1
+Requires at least: 5.4.2
 Tested up to: 5.5.1
-Stable tag: 1.0.4
-Requires PHP: 7.4
+Stable tag: 1.0.5
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,6 @@ Shows disk usage information, recommendations and alerts in your dashboard Right
 
 == Description ==
 
-# WebFacing Disk Usage in At a Glance and Site Health directly from your cPanel® - for WordPress
 🕸️ By WebFacing. Shows disk usage information, recommendations and alerts in your admin Dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only (http should not be allowed, but forwarded to https) with information about the issue, recommendation and actions. Made with a little help from [cPanel, L.L.C., USA](http://www.cpanel.net/) and [PRO ISP AS, Norway](https://proisp.eu/) - many thanks.
 ## This plugin adds the following
 ### Dashboard - At a Glance (widget)
@@ -50,11 +49,11 @@ const WF_DEBUG = true;
 ## Known limitations
  * The amoumt of used disk space reported will not include space taken by other databases than the site's own WordPress database. The reported value may therefore be inaccurate or too low in some cases (accounts with more databases of any type).
  * This plugin will probably not report much if the site is not on a cPanel&reg; managed server, but will do the test for HTTPS only.
- * This plugin is written for **PHP 7.4** and later, and for WordPress 5.4 and later. It's namespaced, has static classes and uses typed class properties.
+ * This plugin was originally written for **PHP 7.4** and later, and for WordPress 5.4.2 and later. It's namespaced, has static classes and uses typed class properties. Now available for PHP 7.2, after removing typed properties in this wporg-version.
 
 == Frequently Asked Questions ==
 
-= Does this plugin add dtabase tables or options? =
+= Does this plugin add database tables or store options? =
 
 No, none.
 
@@ -65,6 +64,10 @@ No.
 = Does it work without cPanel? =
 
 Yes, but max space will be N/A, also used spaces(s) may be unknown. But the 'HTTPS only' test will work.
+
+= Can I contribute to this plugin? =
+
+Yes, visit it's [Github repo](https://github.com/Nettvendt/wf-cpanel-right-now-site-health) and create an issue, clone it and/or file a pull request.
 
 == Screenshots ==
 
@@ -80,5 +83,8 @@ Yes, but max space will be N/A, also used spaces(s) may be unknown. But the 'HTT
 
 == Upgrade Notice ==
 
-= 1.0 =
-Now finally released, working and stable.
+= 1.0.4 =
+Now finally released to wporg, working and stable.
+
+= 1.0.5 =
+Text corrections.
