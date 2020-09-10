@@ -1,22 +1,22 @@
-=== cPanel® Disk Usage, HTTPS only check in Site Health & Right Now Dash ===
+=== WebFacing Disk Usage in At a Glance & Site Health from cPanel® ===
 Contributors: knutsp
 Donate link: https://webfacing.eu/
-Tags: disk-space, https-only, isp
+Tags: disk-space, security, https-only, isp
 Requires at least: 5.4.1
 Tested up to: 5.5.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Shows disk usage information, recommendations and alerts in your dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only, with information about the possible issue, recommendation and actions.
+Shows disk usage information, recommendations and alerts in your dashboard Right Now widget and on Site Health panel tabs. Also includes a Site Health test for HTTPS only, with information about the possible issue, recommendation and actions.
 
 == Description ==
 
-# cPanel&reg; Disk Usage, HTTPS only check in Site Health &amp; Right Now Dash - for WordPress
+# WebFacing Disk Usage in At a Glance and Site Health directly from your cPanel® - for WordPress
 🕸️ By WebFacing. Shows disk usage information, recommendations and alerts in your admin Dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only (http should not be allowed, but forwarded to https) with information about the issue, recommendation and actions. Made with a little help from [cPanel, L.L.C., USA](http://www.cpanel.net/) and [PRO ISP AS, Norway](https://proisp.eu/) - many thanks.
 ## This plugin adds the following
-### Dashboard - Right Now (widget)
+### Dashboard - At a Glance (widget)
  * One item showing used disk space (on a cPanel&reg; controlled server only)
  * A widget footer line mentioning name of web hosting provider, and maximum disk space for current plan/account (on PRO ISP only)
 
