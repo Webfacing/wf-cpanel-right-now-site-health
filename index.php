@@ -10,16 +10,16 @@ namespace WebFacing\cPanel;
  * @license         	GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:     	cPanel® Disk Usage in Site Health & Right Now
- * Description:     	🕸️ By WebFacing. Shows disk usage information and alerts in your admin Dashboard Right Now widget and on Site Health panels. Made with help from PRO ISP.
+ * Plugin Name:     	WebFacing Disk Usage in At a Glance & Site Health from cPanel®
+ * Description:     	🕸️ By WebFacing. Shows your disk usage information and alerts in your admin Dashboard At a Glance widget and as test and info in Site Health tabs. Made with help from PRO ISP and cPanel®.
  * Plugin URI:      	https://webfacing.eu/
- * Version:         	1.0.2
+ * Version:         	1.0.3
  * Author:          	Knut Sparhell
  * Author URI:      	https://profiles.wordpress.org/knutsp/
  * License:         	GPL v2 or later
  * License URI:     	https://www.gnu.org/licenses/gpl-2.0.html
  * Requires PHP:    	7.4
- * Requires at least:   5.4
+ * Requires at least:   5.4.2
  * Tested up to:    	5.5.1
  * Domain Path:     	/languages
  * Text Domain:     	wf-cpanel-right-now-site-health

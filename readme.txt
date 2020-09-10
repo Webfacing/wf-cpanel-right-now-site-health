@@ -2,9 +2,9 @@
 Contributors: knutsp
 Donate link: https://webfacing.eu/
 Tags: disk-space, https-only, isp
-Requires at least: 5.4
+Requires at least: 5.4.1
 Tested up to: 5.5.1
-Stable tag: trunk
+Stable tag: 1.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ Shows disk usage information, recommendations and alerts in your dashboard Right
  * One item showing used disk space (on a cPanel&reg; controlled server only)
  * A widget footer line mentioning name of web hosting provider, and maximum disk space for current plan/account (on PRO ISP only)
 
-### Tools - Site Health panels
+### Tools - Site Health panel
 #### Status (tab)
  * A disk space test with explaining text and possible actions (cPanel&reg; only) with following result types and actions
    * Good (less than 90%)
