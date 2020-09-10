@@ -175,7 +175,8 @@ abstract class Plugin {
 			self::$cpanel_quotas_fresh = true;
 			\set_transient( $transient_name, self::$cpanel_quotas, YEAR_IN_SECONDS );
 		} else {
-			self::$cpanel_quotas = \get_transient( $transient_name );
+			$cpanel_quotas = \get_transient( $transient_name );
+			self::$cpanel_quotas = \is_array( $cpanel_quotas ) ? $cpanel_quotas : [];
 			self::$cpanel_quotas_fresh = false;
 		}
 

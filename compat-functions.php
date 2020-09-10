@@ -112,25 +112,3 @@ if ( ! function_exists( 'mb_str_ends_with' ) ) {
         return mb_substr( $haystack, -$length ) === $needle;
     }
 }
-
-if ( ! function_exists( 'get_browser_name' ) ) {
-	function get_browser_name( string $user_agent ): string {
-		if ( str_contains( $user_agent, 'Opera') || str_contains( $user_agent, 'OPR/') ) return 'Opera';
-		elseif ( str_contains( $user_agent, 'Edge' ) ) return 'Edge';
-		elseif ( str_contains( $user_agent, 'Chrome' ) ) return 'Chrome';
-		elseif ( str_contains( $user_agent, 'Safari' ) ) return 'Safari';
-		elseif ( str_contains( $user_agent, 'Firefox')) return 'Firefox';
-		elseif ( str_contains( $user_agent, 'MSIE') || str_contains( $user_agent, 'Trident/7') ) return 'Internet Explorer';
-		return 'Other';
-	}
-}
-
-/**
- * Find matching product variation id
- */
-function find_matching_product_variation_id( int $product_id, array $attributes ): int {
-    return ( new \WC_Product_Data_Store_CPT() )->find_matching_product_variation(
-        new \WC_Product( $product_id ),
-        $attributes
-    );
-}

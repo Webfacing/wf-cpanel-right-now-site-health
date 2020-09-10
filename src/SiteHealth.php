@@ -115,7 +115,7 @@ class SiteHealth extends Plugin {
 				'label'   => \__( 'HTTPS only', self::$text_domain ),
 				'color'   => 'blue',
 			],
-			'description' => \wpautop( \__( 'You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn\'t handle sensitive data, it\'s a good idea to make sure your website always loads securely over https. This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below.', self::$text_domain ) ),
+			'description' => \wpautop( \__( 'You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn\'t handle sensitive data, it\'s a good idea to make sure your website always loads securely over https.', self::$text_domain ) ),
 			'actions'     => '',
 			'test'        => 'https-only',
 		];
@@ -123,7 +123,7 @@ class SiteHealth extends Plugin {
 		$response = \wp_remote_get( $home_url, [ 'method' => 'HEAD', 'redirection' => 0 ] );
 		$status = \intval( \wp_remote_retrieve_response_code( $response ) );
 		if ( \intval( $status / 100 ) === 2 ) {
-			$result['description'] .= \wpautop( \sprintf( \__('Response status for \'%1$s\' is %2$s.', self::$text_domain ), $home_url, $status ) );
+			$result['description'] .= \wpautop( \__( 'This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below.', self::$text_domain ) ) . \wpautop( \sprintf( \__( 'Response status for \'%1$s\' is %2$s.', self::$text_domain ), $home_url, $status ) );
 			$result['label'  ]      = \__( 'Your site also accepts insecure requests (http).', self::$text_domain );
 			$result['status' ]      = 'recommended';
 			$result['badge'  ]['color'] = 'orange';

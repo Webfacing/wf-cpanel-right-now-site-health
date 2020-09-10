@@ -16,15 +16,18 @@ class RightNow extends Plugin {
 			if ( self::$has_caps ) {
 				$elements = $elements ?? [];
 				self::init_data();
-				if ( self::$disk_space_used && self::$disk_space_max ) {
-					$class = self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ?
-						'critical' : (
-						self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ?
-							'recommended' :
-							'good'
-						)
+				if ( self::$disk_space_used ) {
+					$class = self::$disk_space_max ?
+						( self::$disk_space_used / self::$disk_space_max > self::$limits['critical'] ?
+							'critical' :
+							( self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ?
+								'recommended' :
+								'good'
+							)
+						) :
+						'good'
 					;
-					$title = self::$is_cpanel ? ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), self::$cpanel_user, \size_format( self::$disk_space_max ) ) . ( self::$uploads_used ?  ' ' . \sprintf( \__( 'Your uploaded files is %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) : '' ) . '"' : '';
+					$title = self::$is_cpanel ? ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), self::$cpanel_user, self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A' ) . ( self::$uploads_used ?  ' ' . \sprintf( \__( 'Your uploaded files is %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) : '' ) . '"' : '';
 					$href = self::$is_cpanel ? ' href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '"' : '';
 					$elements[] = '<a ' . $href . 'class="disk-count ' . $class . '"' . $title . '>' . \size_format( self::$disk_space_used, 1 ) . ' ' . \__( 'disk space used', self::$text_domain ) . '</a>';
 				}
