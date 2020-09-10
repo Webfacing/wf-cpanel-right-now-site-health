@@ -199,12 +199,7 @@ abstract class Plugin {
 		if ( \is_array( self::$cpanel_quotas ) && \array_key_exists( 0, self::$cpanel_quotas ) ) {
 			$used  += self::$cpanel_quotas[0];
 		} else {
-			$du = \shell_exec( 'du -sh ' . \ABSPATH );
-			if ( $du ) { 
-				$used += 1024 * \intval( $du );
-			} else {
-				$used = null;
-			}
+			$used += \convertToBytes( \explode( "\t", \shell_exec( 'du -sh ' . \ABSPATH ) )[0] . 'B' );
 		}
 		$used = \defined( '\WF_DEBUG' ) &&  self::rnd ? \rand( self::rnd / 1.25, self::rnd ) : $used;
 		return $used;
