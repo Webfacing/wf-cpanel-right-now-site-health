@@ -40,6 +40,8 @@ abstract class Plugin {
 
 	protected static string     $screen_id;
 
+	protected static bool       $has_caps;
+	
 	protected static bool       $is_cpanel;
 
 	protected static array      $hosts;
@@ -94,6 +96,7 @@ abstract class Plugin {
 		} );
 		
 		\add_action( 'init', function() {
+			self::init_data();
 			$bits = \explode( '/', \rtrim( self::$plugin_data['AuthorURI'], ' /' ) );
 			self::$me = \get_user_by( 'login', \end( $bits ) ) ?: null;
 		} );
@@ -103,7 +106,7 @@ abstract class Plugin {
 			self::$screen_id = self::$wp_screen ? self::$wp_screen->id : '';
 		} );
 		
-		if ( \defined( '\WF_DEBUG' ) && \WF_DEBUG ) {
+		if ( \defined( '\WF_DEBUG' ) && \WF_DEBUG  ) {
 			\add_action( 'admin_notices', function() use ( $tx ) {
 				if ( \is_object( self::$me ) && self::$me->ID === \get_current_user_id() ) {
 					self::init_data(); ?>
@@ -132,6 +135,8 @@ abstract class Plugin {
 	}
 
 	protected static function init_data() {
+
+		self::$has_caps        = \current_user_can( 'edit_posts' ) || \current_user_can( 'edit_pages' ) || \current_user_can( 'upload_files' );
 		
 		$root = '/' . \explode( '/', \ABSPATH )[1] . '/';
 		self::$is_cpanel     = \is_dir( $root . \explode( '/', \ABSPATH )[2] . '/.cpanel' );
@@ -200,7 +205,7 @@ abstract class Plugin {
 				$used = null;
 			}
 		}
-		$used = \defined( '\WF_DEBUG' ) && \WF_DEBUG && \defined( '\WP_DEBUG' ) && \WP_DEBUG && \defined( '\WP_LOCAL_DEV' ) && \WP_LOCAL_DEV && self::$me->ID === \get_current_user_id() && self::rnd ? \rand( self::rnd / 1.25, self::rnd ) : $used;
+		$used = \defined( '\WF_DEBUG' ) &&  self::rnd ? \rand( self::rnd / 1.25, self::rnd ) : $used;
 		return $used;
 	}
 }

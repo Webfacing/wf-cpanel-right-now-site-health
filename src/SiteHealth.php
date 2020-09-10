@@ -14,7 +14,6 @@ class SiteHealth extends Plugin {
 		
 		\add_filter( 'site_status_tests', function( array $tests ): array {
 			self::init_data();
-			//var_dump( 'xxxxxxxxxxxxxxxxx',self::$disk_space_max, self::$disk_space_used );
 			if ( self::$disk_space_max && self::$disk_space_used ) {
 				$tests['direct']['disk-space'] = [
 					'label' => \__( 'Disk usage', self::$text_domain ),
@@ -63,6 +62,10 @@ class SiteHealth extends Plugin {
 						'value'    => self::$cpanel_quotas_fresh ? \__( 'Yes' ) : \__( 'No' ),
 						'private'  => false,
 					],
+					'cpanel_user'  => [ 'label' => \__( 'cPanel&reg; user', self::$text_domain ),
+						'value'    => self::$cpanel_user,
+						'private'  => true,
+					],
 					'proisp'       => [ 'label' => \__( 'At PRO ISP?', self::$text_domain ),
 						'value'    => self::$is_proisp ? \__( 'Yes' ) : \__( 'No' ),
 						'private'  => true,
@@ -70,7 +73,7 @@ class SiteHealth extends Plugin {
 				],
 			];
 			if ( ! self::$is_cpanel ) {
-				unset ( $debug_info[ self::$text_domain ]['fields']['cpanel_fresh'] );
+				unset ( $debug_info[ self::$text_domain ]['fields']['cpanel_fresh'], $debug_info[ self::$text_domain ]['fields']['cpanel_user'] );
 			}
 			return $debug_info;
 		} );
