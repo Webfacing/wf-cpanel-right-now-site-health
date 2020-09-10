@@ -24,10 +24,8 @@
 ## Translation ready, ready translations are
  * Norwegian (bokmål)
 ## Debug and simulation setting
-To simulate high disk space utilization, report fictional, random high results close to upper limit, add all these lines to your `wp-config.php` or in another plugin:
+To simulate high disk space utilization, report fictional, random high results close to upper limit, add this line to your `wp-config.php` or in another plugin:
 ```
-const WP_DEBUG = true;
-const WP_LOCAL_DEV = true;
 const WF_DEBUG = true;
 ```
 ## Known limitations
