@@ -148,6 +148,11 @@ abstract class Plugin {
 		self::$host_id       = \array_key_exists( $num_f - 1, $host_ids ) ? $host_ids[ $num_f - 2] . '.' . $host_ids[ $num_f - 1] : null;
 		
 		self::$hosts = \apply_filters( self::pf . 'hosts', self::hosts ) ?? self::hosts;
+		foreach ( self::$hosts as &$host ) {
+			if ( $host['url'] == 'https://proisp.eu/' && \in_array( \get_user_locale( \wp_get_current_user() ), [ 'nb_NO', 'nn_NO' ] ) ) {
+				$host['url'] = 'https://proisp.no/';
+			}
+		}
 		
 		$exists = \array_key_exists( self::$host_id, self::$hosts );
 		self::$host_label    = $exists ? self::$hosts[ self::$host_id ]['label'] : null;

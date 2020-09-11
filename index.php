@@ -13,7 +13,7 @@ namespace WebFacing\cPanel;
  * Plugin Name:     	WebFacing Disk Usage in At a Glance & Site Health from cPanel®
  * Description:     	🕸️ By WebFacing. Shows your disk usage information and alerts in your admin Dashboard At a Glance widget and as test and info in Site Health tabs. Made with help from PRO ISP and cPanel®.
  * Plugin URI:      	https://webfacing.eu/
- * Version:         	1.0.5
+ * Version:         	1.0.7
  * Author:          	Knut Sparhell
  * Author URI:      	https://profiles.wordpress.org/knutsp/
  * License:         	GPL v2 or later
