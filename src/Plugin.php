@@ -10,7 +10,6 @@ if ( ! \class_exists( '\WP' ) ) {
 
 abstract class Plugin {
 
-	const rnd = 100 * 1024 * 1024 * 1024;
 	const pf = 'wf_cpanel_';
 	const hosts = [
 		'proisp.no' => [ 'label' => 'PRO ISP', 'url' => 'https://proisp.eu/', 'port' => 2083 ],
@@ -19,62 +18,68 @@ abstract class Plugin {
 	const limits = [
 		'good'        => 0.00,
 		'recommended' => 0.90,
-		'critical'    => 0.95
+		'critical'    => 0.95,
 	];
 
-	protected static array      $plugin_data;
+	protected static array          $plugin_data;
 
-	public    static string     $plugin_name;
+	public    static string         $plugin_name;
 
-	public    static string     $plugin_version;
+	public    static string         $plugin_version;
 
-	protected static string     $domain_path;
+	protected static string         $domain_path;
 	
-	public    static string     $text_domain;
+	public    static string         $text_domain;
 
-	public    static string     $pf;
+	public    static string         $pf;
 
-	protected static ?\WP_User  $me;
+	protected static ?\WP_User      $me;
 
-	protected static \WP_Screen $wp_screen;
+	protected static bool           $is_debug;
 
-	protected static string     $screen_id;
+	protected static \WP_Screen     $wp_screen;
 
-	protected static bool       $has_caps;
+	protected static string         $screen_id;
+
+	protected static bool           $has_caps;
 	
-	protected static bool       $is_cpanel;
+	protected static bool           $is_cpanel;
 
-	protected static array      $hosts;
+	protected static array          $hosts;
 
-	protected static ?string    $host_name;
+	protected static ?string        $host_name;
 
-	protected static ?string    $host_id;
+	protected static ?string        $host_id;
 
-	protected static ?string    $host_label;
+	protected static ?string        $host_label;
 
-	protected static ?string    $host_url;
+	protected static ?string        $host_url;
 
-	protected static ?string    $host_port;
+	protected static ?string        $host_port;
 
-	protected static bool       $is_known_isp;
+	protected static string         $user_locale_short;
 
-	protected static bool       $is_proisp;
+	protected static bool           $is_known_isp;
+
+	protected static bool           $is_proisp;
 	
-	protected static ?string    $cpanel_user;
+	protected static ?string        $cpanel_user;
 
-	protected static ?array     $cpanel_quotas;
+	protected static bool           $has_quota_cmd;
 
-	protected static bool       $cpanel_quotas_fresh;
+	protected static ?array         $cpanel_quotas;
 
-	protected static ?int       $disk_space_max;
+	protected static bool           $cpanel_quotas_fresh;
 
-	protected static ?int       $disk_space_used;
+	protected static ?int           $disk_space_max;
 
-	protected static ?int       $uploads_used;
+	protected static ?int           $disk_space_used;
 
-	protected static ?int       $emails_used;
+	protected static ?int           $uploads_used;
 
-	protected static array      $limits;
+	protected static ?int           $emails_used;
+
+	protected static array          $limits;
 
 	public    static function init() {
 		
@@ -91,6 +96,8 @@ abstract class Plugin {
 
 		self::$pf              = \trim( \str_replace( '_', '-', self::pf ) );
 
+		self::$is_debug        = \defined( '\WF_DEBUG' ) && \WF_DEBUG;
+
 		\add_action( 'plugins_loaded', function() {
 			\load_plugin_textdomain( self::$text_domain, false, self::$domain_path );
 		} );
@@ -106,7 +113,7 @@ abstract class Plugin {
 			self::$screen_id = self::$wp_screen ? self::$wp_screen->id : '';
 		} );
 		
-		if ( \defined( '\WF_DEBUG' ) && \WF_DEBUG  ) {
+		if ( self::$is_debug  ) {
 			\add_action( 'admin_notices', function() use ( $tx ) {
 				if ( \is_object( self::$me ) && self::$me->ID === \get_current_user_id() ) {
 					self::init_data(); ?>
@@ -161,24 +168,34 @@ abstract class Plugin {
 
 		self::$host_port     = $exists ? self::$hosts[ self::$host_id ]['port' ] : null;
 
+		self::$user_locale_short = \explode( '_', \get_user_locale( \wp_get_current_user() ) )[0];
+
 		self::$is_known_isp  = \in_array( self::$host_id, \array_keys( self::hosts ), true );
 		
 		self::$is_proisp     = \in_array( self::$host_id, [ 'proisp.no', 'proisp.eu' ], true );
-		
+
 		$cpanel_users = \explode( '/', \ABSPATH );
 		self::$cpanel_user   = \array_key_exists( 2, $cpanel_users ) ? $cpanel_users[2] : null;
 		
-		self::$cpanel_quotas = self::$cpanel_user ? ( ( \json_decode( \file_get_contents( $root . self::$cpanel_user . '/.cpanel/datastore/_Cpanel::Quota.pm__' . self::$cpanel_user ) )->data ) ?? null ) : null;
-
+		self::$cpanel_quotas = \explode( ' ', \trim( \preg_replace('/\s+/', ' ', \exec( 'quota' ) ) ), 4 );
+		\array_shift( self::$cpanel_quotas );
+		self::$cpanel_quotas = \array_map( function( $val ){
+			$val = 1024 * \intval( $val );
+			return $val;
+		}, self::$cpanel_quotas );
+		
 		$transient_name = self::pf . 'cpanel_quotas';
-		if ( \is_array( self::$cpanel_quotas )            &&
-			 \array_key_exists( 1, self::$cpanel_quotas ) &&
-			 \array_key_exists( 1, self::$cpanel_quotas ) &&
-			 ! empty( self::$cpanel_quotas[0] )           &&
-			 ! empty( self::$cpanel_quotas[1] )           &&
-		true ) {
+		self::$has_quota_cmd = \is_array( self::$cpanel_quotas ) && ! empty( self::$cpanel_quotas[0] ) && ! empty( self::$cpanel_quotas[1] );
+		if ( self::$has_quota_cmd ) {
+			$transient_time = HOUR_IN_SECONDS;
+		} else {
+			self::$cpanel_quotas = self::$cpanel_user ? ( \json_decode( \file_get_contents( $root . self::$cpanel_user . '/.cpanel/datastore/_Cpanel::Quota.pm__' . self::$cpanel_user ) )->data ) : null;
+			$transient_time = YEAR_IN_SECONDS;
+		}
+
+		if ( \is_array( self::$cpanel_quotas ) && ! empty( self::$cpanel_quotas[0] ) && ! empty( self::$cpanel_quotas[1] ) ) {
 			self::$cpanel_quotas_fresh = true;
-			\set_transient( $transient_name, self::$cpanel_quotas, YEAR_IN_SECONDS );
+			\set_transient( $transient_name, self::$cpanel_quotas, self::$is_debug ? MINUTE_IN_SECONDS : $transient_time );
 		} else {
 			$cpanel_quotas = \get_transient( $transient_name );
 			self::$cpanel_quotas = \is_array( $cpanel_quotas ) ? $cpanel_quotas : [];
@@ -204,9 +221,15 @@ abstract class Plugin {
 		if ( \is_array( self::$cpanel_quotas ) && \array_key_exists( 0, self::$cpanel_quotas ) ) {
 			$used  += self::$cpanel_quotas[0];
 		} else {
-			$used += \convertToBytes( \explode( "\t", \shell_exec( 'du -sh ' . \ABSPATH ) )[0] . 'B' );
+			$result = \shell_exec( 'du -sh ' . \ABSPATH );
+			$result = $result ? \explode( "\t", $result )[0] : false;
+			if ( $result ) {
+				$used += \convertToBytes( $result . 'B' );
+			} else {
+				$used = null;
+			}
 		}
-		$used = \defined( '\WF_DEBUG' ) &&  self::rnd ? \rand( self::rnd / 1.25, self::rnd ) : $used;
+		$used = self::$is_debug && self::$disk_space_max ? \rand( \ceil( self::$disk_space_max / 1.25 ), self::$disk_space_max ) : $used;
 		return $used;
 	}
 }

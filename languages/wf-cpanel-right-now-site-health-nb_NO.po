@@ -1,105 +1,115 @@
-# Translation of Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) in Norwegian (Bokmål)
-# This file is distributed under the same license as the Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) package.
+# Translation of Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk) in Norwegian (Bokmål)
+# This file is distributed under the same license as the Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-09-10 22:08:47+0000\n"
+"PO-Revision-Date: 2020-09-15 16:14:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: nb_NO\n"
-"Project-Id-Version: Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release)\n"
+"Project-Id-Version: Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk)\n"
 
-#: src/SiteHealth.php:132
+#: src/SiteHealth.php:44
+msgid "(random!)"
+msgstr "(tilfeldig!)"
+
+#: src/SiteHealth.php:61
+msgid "cPanel&reg; has `quota` command?"
+msgstr "cPanel&reg; har `quota`-kommando?"
+
+#: src/SiteHealth.php:136
 msgid "Opens in a new tab."
 msgstr "Åpnes i en ny fane."
 
-#: src/SiteHealth.php:131
+#: src/SiteHealth.php:135
 msgid "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
 msgstr "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
 
-#: src/SiteHealth.php:131
+#: src/SiteHealth.php:135
 msgid "https://www.proisp.eu/guides/force-https-domain/"
 msgstr "https://www.proisp.no/guider/sikre-https-domene/"
 
-#: src/SiteHealth.php:130
+#: src/SiteHealth.php:134
 msgid "Force all traffic to your site to use https"
 msgstr "Sikre at trafikk til nettsiden går over https"
 
-#: src/SiteHealth.php:127
+#: src/SiteHealth.php:131
 msgid "Your site also accepts insecure requests (http)."
 msgstr "Ditt nettsted aksepterer usikre forespørsler (http)."
 
-#: src/SiteHealth.php:126
+#: src/SiteHealth.php:130
 msgid "Response status for '%1$s' is %2$s."
 msgstr "Respons-status for '%1$s' er %2$s."
 
-#: src/SiteHealth.php:126
+#: src/SiteHealth.php:130
 msgid "This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below."
 msgstr "Denne situasjonen kan rettes opp ved å videresende alle http-forespørsler til en https-versjon av den forspurte URL. Se lenke nedenfor."
 
-#: src/SiteHealth.php:118
+#: src/SiteHealth.php:122
 msgid "You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn't handle sensitive data, it's a good idea to make sure your website always loads securely over https."
 msgstr "Du bør sørge for at besøkende til ditt nettsted alltid bruker en sikker forbindelse. Nå besøkende bruker en usikker forbindelse kan det være fordi de brukte en gammel lenke eller bokmerke, eller de bare skrev inn vertsnavnet. Å bruke https i stedet for http betyr at kommunikasjonen mellom nettleseren og nettstedet er kryptert ved bruk av TLS (TransportLagSikkerhet). Selv om ditt nettsted ikke behandler følsomme opplysninger, er det en god ide å sørge for at ditt nettsted alltid lastes sikkert over https."
 
-#: src/SiteHealth.php:112
+#: src/SiteHealth.php:116
 msgid "Your site only accepts secure requests (https)."
 msgstr "Ditt nettsted aksepterer bare sikre forespørsler (https)."
 
-#: src/SiteHealth.php:105
+#: src/SiteHealth.php:109
 msgid "Immediate action is necessary to keep normal site behaviour, and to allow for new content."
 msgstr "Strakstiltak er nødvendig for å sikre normal oppførsel av nettstedet og plass til nytt innhold."
 
-#: src/SiteHealth.php:102
+#: src/SiteHealth.php:106
 msgid "You are very close to reaching the quota on your server"
 msgstr "Du er veldig nær ved å nå plassbegrensningen på din server"
 
-#: src/SiteHealth.php:99
+#: src/SiteHealth.php:103
 msgid "See links below."
 msgstr "Se lenker nedenfor."
 
-#: src/SiteHealth.php:98
+#: src/SiteHealth.php:102
 msgid "You are advised to inspect your server or consult your host for further advice or upgrade."
 msgstr "Du anbefales å undersøke din server eller søke råd hos din nettvert eller oppgradering."
 
-#: src/SiteHealth.php:95
+#: src/SiteHealth.php:99
 msgid "You are close to reaching the quota on your server"
 msgstr "Du er nær ved å nå plassbegrensningen på din server"
 
-#: src/SiteHealth.php:91
+#: src/SiteHealth.php:95
 msgid "Your cPanel Server"
 msgstr "Din cPanel-server"
 
-#: src/SiteHealth.php:90
+#: src/SiteHealth.php:94
 msgid "In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher \"garbage\" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s."
 msgstr "Hos leverandører av internett-tjenester (ISP-er) eller rene webhoteller er diskplass den mengden plass brukt eller tilgjengelig på serveren for lagring av innholdet på ditt nettsted. Dette innholdet inkluderer innlegg, sider, bilder, videoer, logger, andre filer, preferanser, innstillinger og alt annet som er lagret som filler eller i databaser. I tilfelle en fullverdig ISP, brukes den også til å lagre e-poster, inkludert deres fulle innhold og vedlegg. Mengden brukt diskplass har en tendens til å vokse med tiden.</p><p>Den maksimale plassen avhenger av abonnemenstpakken eller kontoen, typisk fra 1GB til over 100GB. Når din tilgjengelige diskplass er oppbrukt vil ditt nettsted kunne feile på rare og uforutsigelige måter. Å slette overflødige, midlertidige filer og annet \"søppel\" kan rette problemet på kort sikt. Å oppgradere tit abonnement eller din konto er en mer varig løsning.</p><p>Diskplass brukt er %1$s av %2$s tilgjengelig. Dine opplastede mediefiler opptar %3$s."
 
-#: src/SiteHealth.php:87
+#: src/SiteHealth.php:91
 msgid "Disk Usage"
 msgstr "Datalagring"
 
-#: src/SiteHealth.php:84
+#: src/SiteHealth.php:88
 msgid "Your server has enough disk space"
 msgstr "Din server har nok lagringsplass"
 
-#: src/SiteHealth.php:69
+#: src/SiteHealth.php:73
 msgid "At PRO ISP?"
 msgstr "På PRO ISP AS?"
 
-#: src/SiteHealth.php:65
+#: src/SiteHealth.php:69
 msgid "cPanel&reg; user"
 msgstr "cPanel&reg;-bruker"
 
-#: src/SiteHealth.php:61
+#: src/SiteHealth.php:65
 msgid "Is cPanel&reg; data fresh?"
 msgstr "Er cPanel&reg;-data ferske?"
 
-#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:70
+#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:66
+#: src/SiteHealth.php:74
 msgid "No"
 msgstr "Nei"
 
-#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:70
+#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:66
+#: src/SiteHealth.php:74
 msgid "Yes"
 msgstr "Ja"
 
@@ -135,7 +145,7 @@ msgstr "Udefinert"
 msgid "Enabled"
 msgstr "Slått på"
 
-#: src/SiteHealth.php:25 src/SiteHealth.php:115
+#: src/SiteHealth.php:25 src/SiteHealth.php:119
 msgid "HTTPS only"
 msgstr "Kun HTTPS"
 
@@ -143,11 +153,11 @@ msgstr "Kun HTTPS"
 msgid "Disk usage"
 msgstr "Lagringplass"
 
-#: src/RightNow.php:55
+#: src/RightNow.php:56
 msgid "Hosted at <a href=\"%1$s\">%2$s</a>."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a>."
 
-#: src/RightNow.php:53
+#: src/RightNow.php:54
 msgid "Hosted at <a href=\"%1$s\">%2$s</a> using a <strong>%3$s</strong> account with %4$s."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a> med en <strong>%3$s</strong>-konto med %4$s."
 

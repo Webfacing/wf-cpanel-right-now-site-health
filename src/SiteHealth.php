@@ -41,7 +41,7 @@ class SiteHealth extends Plugin {
 					],
 					'used_space'   => [
 						'label'    => \__( 'Used space &ndash; total', self::$text_domain ),
-						'value'    => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A',
+						'value'    => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) . ( self::$is_debug ? \__( ' (random!)', self::$text_domain ) : '' ) : 'N/A',
 						'private'  => false,
 					],
 					'upload_used'  => [
@@ -56,6 +56,10 @@ class SiteHealth extends Plugin {
 					],
 					'cpanel'       => [ 'label' => \__( 'Is cPanel&reg;?', self::$text_domain ),
 						'value'    => self::$is_cpanel ? \__( 'Yes' ) : \__( 'No' ),
+						'private'  => false,
+					],
+					'cpanel_quota' => [ 'label' => \__( 'cPanel&reg; has quota command?', self::$text_domain ),
+						'value'    => self::$has_quota_cmd ? \__( 'Yes' ) : \__( 'No' ),
 						'private'  => false,
 					],
 					'cpanel_fresh' => [ 'label' => \__( 'Is cPanel&reg; data fresh?', self::$text_domain ),
@@ -88,7 +92,7 @@ class SiteHealth extends Plugin {
 				'color'   => 'blue',
 			],
 			'description' => \wpautop( \sprintf( \__( 'In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher "garbage" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s.', self::$text_domain ), self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) : 'N/A', self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A', self::$uploads_used ? \size_format( self::$uploads_used, 1 ) : 'N/A' ) ),
-			'actions'     => ( self::$is_cpanel ? '<a href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '">' . \__( 'Your cPanel Server', self::$text_domain ) . '</a>' : '' ) . ( self::$host_label ? ( self::$host_url ? ' &nbsp; | &nbsp; <a href="' . self::$host_url . '">' : '' ) . self::$host_label . ( self::$host_url ? '</a>' : '' ) : '' ),
+			'actions'     => ( self::$is_cpanel ? '<a href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '?locale=' . self::$user_locale_short . '">' . \__( 'Your cPanel Server', self::$text_domain ) . '</a>' : '' ) . ( self::$host_label ? ( self::$host_url ? ' &nbsp; | &nbsp; <a href="' . self::$host_url . '">' : '' ) . self::$host_label . ( self::$host_url ? '</a>' : '' ) : '' ),
 			'test'        => 'disk-space',
 		];
 		if ( self::$disk_space_used / self::$disk_space_max > self::$limits['recommended'] ) {

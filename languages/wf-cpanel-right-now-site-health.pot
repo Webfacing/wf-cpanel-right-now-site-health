@@ -162,3 +162,9 @@ msgid ""
 "This situation can and should be fixed by forwarding all http requests to a "
 "https version of the requested URL. See link below."
 msgstr ""
+
+msgid "cPanel&reg; has `quota` command?"
+msgstr ""
+
+msgid "(random!)"
+msgstr ""
