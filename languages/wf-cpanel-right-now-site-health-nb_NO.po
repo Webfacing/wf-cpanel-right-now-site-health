@@ -1,23 +1,23 @@
-# Translation of Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk) in Norwegian (Bokmål)
-# This file is distributed under the same license as the Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk) package.
+# Translation of Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) in Norwegian (Bokmål)
+# This file is distributed under the same license as the Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-09-15 16:14:09+0000\n"
+"PO-Revision-Date: 2020-09-15 17:59:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: nb_NO\n"
-"Project-Id-Version: Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Development (trunk)\n"
-
-#: src/SiteHealth.php:44
-msgid "(random!)"
-msgstr "(tilfeldig!)"
+"Project-Id-Version: Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release)\n"
 
 #: src/SiteHealth.php:61
 msgid "cPanel&reg; has `quota` command?"
 msgstr "cPanel&reg; har `quota`-kommando?"
+
+#: src/SiteHealth.php:44
+msgid "(random!)"
+msgstr "(tilfeldig!)"
 
 #: src/SiteHealth.php:136
 msgid "Opens in a new tab."
