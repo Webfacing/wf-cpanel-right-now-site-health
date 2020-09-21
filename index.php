@@ -10,8 +10,8 @@ namespace WebFacing\cPanel;
  * @license         	GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:     	WebFacing Disk Usage in At a Glance & Site Health from cPanel®
- * Description:     	🕸️ By WebFacing. Shows your disk usage information and alerts in your admin Dashboard At a Glance widget and as test and info in Site Health tabs. Made with help from PRO ISP and cPanel®.
+ * Plugin Name:     	WebFacing - Disk Usage from cPanel® on Dashboard & in Site Health 
+ * Description:     	🕸️ By WebFacing. Shows your disk usage information, used and max allowed, plus alerts, in your admin Dashboard At a Glance widget and as test and info in Site Health tabs, including space used by your media uploads and cPanel® mail accounts. Also adds a HTTPS only test to Site Health. Made with help from PRO ISP and cPanel®.
  * Plugin URI:      	https://webfacing.eu/
  * Version:         	2.0
  * Author:          	Knut Sparhell

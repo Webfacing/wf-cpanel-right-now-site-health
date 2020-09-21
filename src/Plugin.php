@@ -175,7 +175,7 @@ abstract class Plugin {
 		self::$is_proisp     = \in_array( self::$host_id, [ 'proisp.no', 'proisp.eu' ], true );
 
 		$cpanel_users = \explode( '/', \ABSPATH );
-		self::$cpanel_user   = \array_key_exists( 2, $cpanel_users ) ? $cpanel_users[2] : null;
+		self::$cpanel_user   = self::$is_cpanel && \array_key_exists( 2, $cpanel_users ) ? $cpanel_users[2] : null;
 		
 		self::$cpanel_quotas = \explode( ' ', \trim( \preg_replace('/\s+/', ' ', \exec( 'quota' ) ) ), 4 );
 		\array_shift( self::$cpanel_quotas );
@@ -208,9 +208,17 @@ abstract class Plugin {
 
 		self::$limits = \apply_filters( self::pf . 'limits', self::limits ) ?? self::limits;
 
-		self::$uploads_used = \convertToBytes( \explode( "\t", \exec( 'du -sh ' . \wp_upload_dir()['basedir'] ) )[0] . 'B' );
+		$uploads_used = \explode( "\t", \exec( 'du -sh ' . \wp_upload_dir()['basedir'] ) )[0];
+		$uploads_used = $uploads_used ?: \get_dirsize( \wp_upload_dir()['basedir'] );
+		self::$uploads_used = \convertToBytes( $uploads_used . 'B' );
 
-		self::$emails_used  = \convertToBytes( \explode( "\t", \exec( 'du -sh ' . $root . self::$cpanel_user . '/mail' ) )[0] . 'B' );
+		if ( self::$is_cpanel ) {
+			$emails_used = \explode( "\t", \exec( 'du -sh ' . $root . self::$cpanel_user . '/mail' ) )[0];
+			$emails_used = $emails_used ?: \get_dirsize( $root . self::$cpanel_user . '/mail' );
+			self::$emails_used  = \convertToBytes( $emails_used . 'B' );
+		} else {
+			self::$emails_used = null;
+		}
 	}
 
 	protected static function get_disk_space_used(): ?int {
@@ -223,6 +231,7 @@ abstract class Plugin {
 		} else {
 			$result = \shell_exec( 'du -sh ' . \ABSPATH );
 			$result = $result ? \explode( "\t", $result )[0] : false;
+			$result = $result ?: \get_dirsize( \dirname( \ABSPATH ) );
 			if ( $result ) {
 				$used += \convertToBytes( $result . 'B' );
 			} else {

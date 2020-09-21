@@ -1,15 +1,31 @@
-# Translation of Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) in Norwegian (Bokmål)
-# This file is distributed under the same license as the Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release) package.
+# Translation of Plugins - WebFacing &#8211; Disk Usage from cPanel® on Dashboard &amp; in Site Health - Stable (latest release) in Norwegian (Bokmål)
+# This file is distributed under the same license as the Plugins - WebFacing &#8211; Disk Usage from cPanel® on Dashboard &amp; in Site Health - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-09-15 17:59:13+0000\n"
+"PO-Revision-Date: 2020-09-21 15:14:26+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: nb_NO\n"
-"Project-Id-Version: Plugins - WebFacing Disk Usage in At a Glance &amp; Site Health from cPanel® - Stable (latest release)\n"
+"Project-Id-Version: Plugins - WebFacing &#8211; Disk Usage from cPanel® on Dashboard &amp; in Site Health - Stable (latest release)\n"
+
+#: src/RightNow.php:40
+msgid "Your email use %s."
+msgstr "Din e-post bruker %s."
+
+#: src/SiteHealth.php:25 src/SiteHealth.php:119
+msgid "Security"
+msgstr "Sikkerhet"
+
+#. Description of the plugin
+msgid "🕸️ By WebFacing. Shows your disk usage information, used and max allowed, plus alerts, in your admin Dashboard At a Glance widget and as test and info in Site Health tabs, including space used by your media uploads and cPanel® mail accounts. Also adds a HTTPS only test to Site Health. Made with help from PRO ISP and cPanel®."
+msgstr "🕸️ Av Nettvendt. Viser diskbruk-informasjon, brukt og maks, og varsler i din admin Kontrollpanel Oversikt-widget, og tester og info på Nettstedshelse-panelene, inkludert plass brukt av dime media-opplastinger og cPanel® e-postkonti. Legger også til en Kun HTTPS-test i Netstedshelse. Laget med hjelp fra PRO ISP og cPanel®."
+
+#. Plugin Name of the plugin
+msgid "WebFacing - Disk Usage from cPanel® on Dashboard & in Site Health"
+msgstr "Nettvendt - Brukt lagringsplass fra cPanel® på Kontrollpanelet og i Nettsedshelse"
 
 #: src/SiteHealth.php:61
 msgid "cPanel&reg; has `quota` command?"
@@ -49,7 +65,7 @@ msgstr "Denne situasjonen kan rettes opp ved å videresende alle http-forespørs
 
 #: src/SiteHealth.php:122
 msgid "You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn't handle sensitive data, it's a good idea to make sure your website always loads securely over https."
-msgstr "Du bør sørge for at besøkende til ditt nettsted alltid bruker en sikker forbindelse. Nå besøkende bruker en usikker forbindelse kan det være fordi de brukte en gammel lenke eller bokmerke, eller de bare skrev inn vertsnavnet. Å bruke https i stedet for http betyr at kommunikasjonen mellom nettleseren og nettstedet er kryptert ved bruk av TLS (TransportLagSikkerhet). Selv om ditt nettsted ikke behandler følsomme opplysninger, er det en god ide å sørge for at ditt nettsted alltid lastes sikkert over https."
+msgstr "Du bør sørge for at besøkende til ditt nettsted alltid bruker en sikker tilkobling. Når besøkende bruker en usikker forbindelse kan det være fordi de brukte en gammel lenke eller bokmerke, eller de bare skrev inn vertsnavnet. Å bruke https i stedet for http betyr at kommunikasjonen mellom nettleseren og nettstedet er kryptert ved bruk av TLS (TransportLagSikkerhet). Selv om ditt nettsted ikke behandler følsomme opplysninger, er det en god ide å sørge for at ditt nettsted alltid lastes sikkert over https."
 
 #: src/SiteHealth.php:116
 msgid "Your site only accepts secure requests (https)."
@@ -145,35 +161,31 @@ msgstr "Udefinert"
 msgid "Enabled"
 msgstr "Slått på"
 
-#: src/SiteHealth.php:25 src/SiteHealth.php:119
-msgid "HTTPS only"
-msgstr "Kun HTTPS"
-
 #: src/SiteHealth.php:19
 msgid "Disk usage"
 msgstr "Lagringplass"
 
-#: src/RightNow.php:56
+#: src/RightNow.php:67
 msgid "Hosted at <a href=\"%1$s\">%2$s</a>."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a>."
 
-#: src/RightNow.php:54
+#: src/RightNow.php:65
 msgid "Hosted at <a href=\"%1$s\">%2$s</a> using a <strong>%3$s</strong> account with %4$s."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a> med en <strong>%3$s</strong>-konto med %4$s."
 
-#: src/RightNow.php:42
+#: src/RightNow.php:55
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/RightNow.php:32
+#: src/RightNow.php:45
 msgid "disk space used"
 msgstr "lagringsplass brukt"
 
-#: src/RightNow.php:30
-msgid "Your uploaded files is %s."
-msgstr "Dine opplastede filer utgjør %s."
+#: src/RightNow.php:37
+msgid "Your uploaded files use %s."
+msgstr "Dine opplastede filer bruker %s."
 
-#: src/RightNow.php:30
+#: src/RightNow.php:31
 msgid "Maximum allowed for your account %1$s: %2$s."
 msgstr "Maksimalt tillatt for din konto %1$s: %2$s."
 
@@ -185,14 +197,6 @@ msgstr "https://profiles.wordpress.org/knutsp/"
 msgid "Knut Sparhell"
 msgstr "Knut Sparhell"
 
-#. Description of the plugin
-msgid "🕸️ By WebFacing. Shows your disk usage information and alerts in your admin Dashboard At a Glance widget and as test and info in Site Health tabs. Made with help from PRO ISP and cPanel®."
-msgstr "🕸️ Av Nettvendt. Viser diskbruk-informasjon og varsler i din admin Kontrollpanel Oversikt-widget og på Nettstedshelse-panelene. Laget med hjelp fra PRO ISP og cPanel&reg;."
-
 #. Plugin URI of the plugin
 msgid "https://webfacing.eu/"
 msgstr "https://nettvendt.no/"
-
-#. Plugin Name of the plugin
-msgid "WebFacing Disk Usage in At a Glance & Site Health from cPanel®"
-msgstr "Nettvendt Diskbruk i Oversikt og Nettstedshelse fra cPanel®"

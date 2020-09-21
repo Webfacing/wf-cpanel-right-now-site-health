@@ -27,7 +27,20 @@ class RightNow extends Plugin {
 						) :
 						'good'
 					;
-					$title = self::$is_cpanel ? ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), current_user_can( 'manage_options' ) ? self::$cpanel_user : '', self::$disk_space_max ? \size_format( self::$disk_space_max ) : 'N/A' ) . ( self::$uploads_used ?  ' ' . \sprintf( \__( 'Your uploaded files is %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) : '' ) . '"' : '';
+					$title = self::$uploads_used ?
+						( ' title="' . \sprintf( \__( 'Maximum allowed for your account %1$s: %2$s.', self::$text_domain ), current_user_can( 'manage_options' ) ?
+							self::$cpanel_user :
+							'', self::$disk_space_max ?
+								\size_format( self::$disk_space_max ) :
+								'N/A' ) .
+							( self::$uploads_used ?
+								' ' . \sprintf( \__( 'Your uploaded files use %s.', self::$text_domain ), \size_format( self::$uploads_used ) ) :
+								'' ) .
+							( self::$emails_used ?
+								' ' . \sprintf( \__( 'Your email use %s.', self::$text_domain ), \size_format( self::$emails_used ) ) :
+								'' ) .
+						'"' ) :
+					'';
 					$href = self::$is_cpanel ? ' href="https://' . self::$host_name . ( self::$host_port ? ':' . self::$host_port : '' ) . '?locale=' . self::$user_locale_short . '"' : '';
 					$elements[] = '<a ' . $href . 'class="disk-count ' . $class . '"' . $title . '>' . \size_format( self::$disk_space_used, 1 ) . ' ' . \__( 'disk space used', self::$text_domain ) . '</a>';
 				}
@@ -37,16 +50,14 @@ class RightNow extends Plugin {
 		
 		\add_action( 'rightnow_end', function() {
 			if ( self::$has_caps ) {
-				$disk_space_max = \size_format( self::$disk_space_max );
+				$disk_space_max = \sanitize_key( \str_replace( [ '&nbsp;', ' ' ], ' ', \size_format( self::$disk_space_max ) ) );
 				$proisp_packages = [
-								  0 => \__('Unknown', self::$text_domain ),
-							 '1 GB' => 'Start',
-							'30 GB' => 'Medium',
-						   '100 GB' => 'Premium',
-						  '1000 MB' => 'Start',
-						 '1 000 MB' => 'Start',
-						 '1 000 MB' => 'Start',		// nbsp char A0
-					'1&nbsp;000 MB' => 'Start',
+					                         0 => \__( 'Unknown', self::$text_domain ),
+					    sanitize_key( '1 GB' ) => 'Start',
+					   sanitize_key( '30 GB' ) => 'Medium',
+					  sanitize_key( '100 GB' ) => 'Premium',
+					 sanitize_key( '1000 MB' ) => 'Start',
+					sanitize_key( '1 000 MB' ) => 'Start',
 				];
 				$proisp_package  = self::$is_proisp ? 'Pro&nbsp;' . $proisp_packages[ $disk_space_max ] : '';
 				if ( self::$host_label ) {

@@ -22,7 +22,7 @@ class SiteHealth extends Plugin {
 			}
 			if ( \str_starts_with( get_home_url(), 'https://' ) ) {
 				$tests['direct']['https-only'] = [
-					'label' => \__( 'HTTPS only', self::$text_domain ),
+					'label' => \__( 'Security' ),
 					'test'  => [ __CLASS__, 'https_only_test' ]
 				];
 			}
@@ -41,7 +41,7 @@ class SiteHealth extends Plugin {
 					],
 					'used_space'   => [
 						'label'    => \__( 'Used space &ndash; total', self::$text_domain ),
-						'value'    => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) . ( self::$is_debug ? \__( ' (random!)', self::$text_domain ) : '' ) : 'N/A',
+						'value'    => self::$disk_space_used ? \size_format( self::$disk_space_used, 1 ) . ' ' . ( self::$is_debug ? \__( '(random!)', self::$text_domain ) : '' ) : 'N/A',
 						'private'  => false,
 					],
 					'upload_used'  => [
@@ -58,7 +58,7 @@ class SiteHealth extends Plugin {
 						'value'    => self::$is_cpanel ? \__( 'Yes' ) : \__( 'No' ),
 						'private'  => false,
 					],
-					'cpanel_quota' => [ 'label' => \__( 'cPanel&reg; has quota command?', self::$text_domain ),
+					'cpanel_quota' => [ 'label' => \__( 'cPanel&reg; has `quota` command?', self::$text_domain ),
 						'value'    => self::$has_quota_cmd ? \__( 'Yes' ) : \__( 'No' ),
 						'private'  => false,
 					],
@@ -116,7 +116,7 @@ class SiteHealth extends Plugin {
 			'label'       => \__( 'Your site only accepts secure requests (https).', self::$text_domain ),
 			'status'      => 'good',
 			'badge'       => [
-				'label'   => \__( 'HTTPS only', self::$text_domain ),
+				'label'   => \__( 'Security' ),
 				'color'   => 'blue',
 			],
 			'description' => \wpautop( \__( 'You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn\'t handle sensitive data, it\'s a good idea to make sure your website always loads securely over https.', self::$text_domain ) ),
