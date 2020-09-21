@@ -1,4 +1,4 @@
-# WebFacing Disk Usage in At a Glance & Site Health from cPanel&reg; - for WordPress
+# WebFacing - Disk Usage from cPanel&reg; in At a Glance & Site Health - for WordPress
 🕸️ By WebFacing. Shows disk usage information, recommendations and alerts in your admin Dashboard Right Now widget and on Site Health panels. Also includes a Site Health test for HTTPS only (http should not be allowed, but forwarded to https) with information about the issue, recommendation and actions. Made with a little help from [cPanel, L.L.C., USA](http://www.cpanel.net/) and [PRO ISP AS, Norway](https://proisp.eu/) - many thanks.
 ## This plugin adds the following
 ### Dashboard - At a Glance (widget)
@@ -9,11 +9,11 @@
 #### Status (tab)
  * A disk space test with explaining text and possible actions (cPanel&reg; only) with following result types and actions
    * Good (less than 90%)
-   * Recommended (over 90%, but less than 95%)
+   * Recommended action (over 90%, but less than 95%)
    * Critical (over 95%)
  * A HTTPS only test with explaining text (with HTTPS enabled only), actions with link to a relevant guide (special guide in case PRO ISP), and with the following result types and actions
   * Good (http loopback requests are rejected)
-  * Recommended (http loopback requests successful)
+  * Recommended action (http loopback requests successful)
 
 #### Info (tab)
  * A disk space section containing (cPanel&reg; only)
