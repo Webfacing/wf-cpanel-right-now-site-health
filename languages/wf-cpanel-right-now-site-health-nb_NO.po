@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WebFacing &#8211; Disk Usage from cPanel® on Dashboard &amp; in Site Health - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-09-21 15:14:26+0000\n"
+"PO-Revision-Date: 2021-06-25 02:53:40+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,181 +11,465 @@ msgstr ""
 "Language: nb_NO\n"
 "Project-Id-Version: Plugins - WebFacing &#8211; Disk Usage from cPanel® on Dashboard &amp; in Site Health - Stable (latest release)\n"
 
-#: src/RightNow.php:40
-msgid "Your email use %s."
-msgstr "Din e-post bruker %s."
+#: src/SiteHealth.php:55
+msgctxt "Site Health Status Label"
+msgid "IOPS"
+msgstr "Inn-/ut-operasjoner pr. sek"
 
-#: src/SiteHealth.php:25 src/SiteHealth.php:119
-msgid "Security"
-msgstr "Sikkerhet"
+#: src/SiteHealth.php:414
+msgctxt "Site Health Status"
+msgid "ok"
+msgstr "ok"
 
-#. Description of the plugin
-msgid "🕸️ By WebFacing. Shows your disk usage information, used and max allowed, plus alerts, in your admin Dashboard At a Glance widget and as test and info in Site Health tabs, including space used by your media uploads and cPanel® mail accounts. Also adds a HTTPS only test to Site Health. Made with help from PRO ISP and cPanel®."
-msgstr "🕸️ Av Nettvendt. Viser diskbruk-informasjon, brukt og maks, og varsler i din admin Kontrollpanel Oversikt-widget, og tester og info på Nettstedshelse-panelene, inkludert plass brukt av dime media-opplastinger og cPanel® e-postkonti. Legger også til en Kun HTTPS-test i Netstedshelse. Laget med hjelp fra PRO ISP og cPanel®."
+#: src/SiteHealth.php:414
+msgctxt "Site Health Status"
+msgid "suspended"
+msgstr "sperret"
 
-#. Plugin Name of the plugin
-msgid "WebFacing - Disk Usage from cPanel® on Dashboard & in Site Health"
-msgstr "Nettvendt - Brukt lagringsplass fra cPanel® på Kontrollpanelet og i Nettsedshelse"
-
-#: src/SiteHealth.php:61
-msgid "cPanel&reg; has `quota` command?"
-msgstr "cPanel&reg; har `quota`-kommando?"
-
-#: src/SiteHealth.php:44
-msgid "(random!)"
-msgstr "(tilfeldig!)"
-
-#: src/SiteHealth.php:136
+#: src/SiteHealth.php:372
+msgctxt "Site Health Status"
 msgid "Opens in a new tab."
-msgstr "Åpnes i en ny fane."
+msgstr "(åpnes i en ny fane)"
 
-#: src/SiteHealth.php:135
-msgid "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
-msgstr "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
+#: src/SiteHealth.php:371
+msgctxt "Site Health Status"
+msgid "https://www.proisp.eu/guides/mx-entry-cpanel/"
+msgstr "https://www.proisp.no/guider/mx-oppforing-oppsett-epost-cpanel/"
 
-#: src/SiteHealth.php:135
+#: src/SiteHealth.php:368
+msgctxt "Site Health Status"
+msgid "MX Entry and email routing in cPanel®"
+msgstr "MX-oppføring og e-postruting i cPanel®"
+
+#: src/SiteHealth.php:356
+msgctxt "Site Health Status Label"
+msgid "You are having issues receiving email from this server to addresses on '%1$s'."
+msgstr "Du har problemer med å motta e-post fra denne serveren til adresser på %1$s."
+
+#: src/SiteHealth.php:345
+msgctxt "Site Health Info"
+msgid "Email routing"
+msgstr "E-postruting"
+
+#: src/SiteHealth.php:342
+msgctxt "Site Health Status"
+msgid "Your email routing is fine"
+msgstr "Din e-postruting er i orden"
+
+#: src/SiteHealth.php:333
+msgctxt "Site Health Status"
 msgid "https://www.proisp.eu/guides/force-https-domain/"
 msgstr "https://www.proisp.no/guider/sikre-https-domene/"
 
-#: src/SiteHealth.php:134
+#: src/SiteHealth.php:332
+msgctxt "Site Health Status"
 msgid "Force all traffic to your site to use https"
-msgstr "Sikre at trafikk til nettsiden går over https"
+msgstr "Tving all trafikk mot ditt nettsted til å bruke https"
 
-#: src/SiteHealth.php:131
+#: src/SiteHealth.php:329
+msgctxt "Site Health Status"
 msgid "Your site also accepts insecure requests (http)."
 msgstr "Ditt nettsted aksepterer usikre forespørsler (http)."
 
-#: src/SiteHealth.php:130
-msgid "Response status for '%1$s' is %2$s."
-msgstr "Respons-status for '%1$s' er %2$s."
+#: src/SiteHealth.php:328
+msgctxt "Site Health Status, %1$s = HTTP status"
+msgid "Response status for <code>%1$s</code> is %2$s."
+msgstr "Respons-status for <code>%1$s</code> er %2$s."
 
-#: src/SiteHealth.php:130
-msgid "This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below."
-msgstr "Denne situasjonen kan rettes opp ved å videresende alle http-forespørsler til en https-versjon av den forspurte URL. Se lenke nedenfor."
+#: src/SiteHealth.php:317
+msgctxt "Site Health Info Label"
+msgid "Security"
+msgstr "Sikkerhet"
 
-#: src/SiteHealth.php:122
-msgid "You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn't handle sensitive data, it's a good idea to make sure your website always loads securely over https."
-msgstr "Du bør sørge for at besøkende til ditt nettsted alltid bruker en sikker tilkobling. Når besøkende bruker en usikker forbindelse kan det være fordi de brukte en gammel lenke eller bokmerke, eller de bare skrev inn vertsnavnet. Å bruke https i stedet for http betyr at kommunikasjonen mellom nettleseren og nettstedet er kryptert ved bruk av TLS (TransportLagSikkerhet). Selv om ditt nettsted ikke behandler følsomme opplysninger, er det en god ide å sørge for at ditt nettsted alltid lastes sikkert over https."
-
-#: src/SiteHealth.php:116
+#: src/SiteHealth.php:314
+msgctxt "Site Health Status"
 msgid "Your site only accepts secure requests (https)."
-msgstr "Ditt nettsted aksepterer bare sikre forespørsler (https)."
+msgstr "Ditt nettsted aksepterer barer sikre forespørsler (https)."
 
-#: src/SiteHealth.php:109
-msgid "Immediate action is necessary to keep normal site behaviour, and to allow for new content."
-msgstr "Strakstiltak er nødvendig for å sikre normal oppførsel av nettstedet og plass til nytt innhold."
-
-#: src/SiteHealth.php:106
+#: src/SiteHealth.php:304
+msgctxt "Site Health Info"
 msgid "You are very close to reaching the quota on your server"
-msgstr "Du er veldig nær ved å nå plassbegrensningen på din server"
+msgstr "Du er veldig nær din maksimale diskplass på din server."
 
-#: src/SiteHealth.php:103
+#: src/SiteHealth.php:301
+msgctxt "Site Health Status"
 msgid "See links below."
 msgstr "Se lenker nedenfor."
 
-#: src/SiteHealth.php:102
-msgid "You are advised to inspect your server or consult your host for further advice or upgrade."
-msgstr "Du anbefales å undersøke din server eller søke råd hos din nettvert eller oppgradering."
-
-#: src/SiteHealth.php:99
+#: src/SiteHealth.php:297
+msgctxt "Site Health Status"
 msgid "You are close to reaching the quota on your server"
-msgstr "Du er nær ved å nå plassbegrensningen på din server"
+msgstr "Du er nær din maksimale diskplass på din server."
 
-#: src/SiteHealth.php:95
+#: src/SiteHealth.php:293
+msgctxt "Site Health Status"
 msgid "Your cPanel Server"
-msgstr "Din cPanel-server"
+msgstr "Din cPanel®-server"
 
-#: src/SiteHealth.php:94
-msgid "In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher \"garbage\" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s."
-msgstr "Hos leverandører av internett-tjenester (ISP-er) eller rene webhoteller er diskplass den mengden plass brukt eller tilgjengelig på serveren for lagring av innholdet på ditt nettsted. Dette innholdet inkluderer innlegg, sider, bilder, videoer, logger, andre filer, preferanser, innstillinger og alt annet som er lagret som filler eller i databaser. I tilfelle en fullverdig ISP, brukes den også til å lagre e-poster, inkludert deres fulle innhold og vedlegg. Mengden brukt diskplass har en tendens til å vokse med tiden.</p><p>Den maksimale plassen avhenger av abonnemenstpakken eller kontoen, typisk fra 1GB til over 100GB. Når din tilgjengelige diskplass er oppbrukt vil ditt nettsted kunne feile på rare og uforutsigelige måter. Å slette overflødige, midlertidige filer og annet \"søppel\" kan rette problemet på kort sikt. Å oppgradere tit abonnement eller din konto er en mer varig løsning.</p><p>Diskplass brukt er %1$s av %2$s tilgjengelig. Dine opplastede mediefiler opptar %3$s."
+#: src/SiteHealth.php:292
+msgctxt "Site Health Status"
+msgid "N/A"
+msgstr "I/T"
 
-#: src/SiteHealth.php:91
+#: src/SiteHealth.php:289
+msgctxt "Site Health Status"
 msgid "Disk Usage"
-msgstr "Datalagring"
+msgstr "Diskbruk"
 
-#: src/SiteHealth.php:88
+#: src/SiteHealth.php:286
+msgctxt "Site Health Status"
 msgid "Your server has enough disk space"
-msgstr "Din server har nok lagringsplass"
+msgstr "Din server har nok diskplass"
 
-#: src/SiteHealth.php:73
+#: src/SiteHealth.php:273
+msgctxt "Site Health Info"
 msgid "At PRO ISP?"
-msgstr "På PRO ISP AS?"
+msgstr "På PRO ISP?"
 
-#: src/SiteHealth.php:69
-msgid "cPanel&reg; user"
-msgstr "cPanel&reg;-bruker"
+#: src/SiteHealth.php:268
+msgctxt "Site Health Info"
+msgid "Contact email addresses"
+msgstr "E-postadresser for kontakt"
 
-#: src/SiteHealth.php:65
-msgid "Is cPanel&reg; data fresh?"
-msgstr "Er cPanel&reg;-data ferske?"
+#: src/SiteHealth.php:249
+msgctxt "Site Health Info"
+msgid " &ndash; Email routing is local?"
+msgstr " &ndash; E-post-ruting er lokal?"
 
-#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:66
-#: src/SiteHealth.php:74
-msgid "No"
-msgstr "Nei"
+#: src/SiteHealth.php:243
+msgctxt "Site Health Info"
+msgid " &ndash; MX entry points to self?"
+msgstr " &ndash; MX-oppføring peker til seg?"
 
-#: src/SiteHealth.php:58 src/SiteHealth.php:62 src/SiteHealth.php:66
-#: src/SiteHealth.php:74
-msgid "Yes"
-msgstr "Ja"
+#: src/SiteHealth.php:224
+msgctxt "Site Health Info"
+msgid " &ndash;&ndash; Emails"
+msgstr " &ndash;&ndash; E-poster"
 
-#: src/SiteHealth.php:57
-msgid "Is cPanel&reg;?"
-msgstr "Er på cPanel&reg;?"
+#: src/SiteHealth.php:218
+msgctxt "Site Health Info"
+msgid " &ndash;&ndash; Uploaded files"
+msgstr " &ndash;&ndash; Opplastede filer"
 
-#: src/SiteHealth.php:53
-msgid " &ndash; Emails"
-msgstr " &ndash; E-poster"
+#: src/SiteHealth.php:212
+msgctxt "Site Health Info"
+msgid " &ndash;&ndash; Databases"
+msgstr " &ndash;&ndash; Databaser"
 
-#: src/SiteHealth.php:48
-msgid " &ndash; Uploaded files"
-msgstr " &ndash; Opplastede filer"
+#: src/SiteHealth.php:206
+msgctxt "Site Health Info"
+msgid " &ndash; Used disk space &ndash; total"
+msgstr " &ndash; Brukt diskplass &ndash; totalt"
 
-#: src/SiteHealth.php:43
-msgid "Used space &ndash; total"
-msgstr "Brukt plass &ndash; totalt"
+#: src/SiteHealth.php:201 src/SiteHealth.php:207 src/SiteHealth.php:213
+#: src/SiteHealth.php:219 src/SiteHealth.php:225
+msgctxt "Site Health Info"
+msgid "N/A"
+msgstr "I/T"
 
-#: src/SiteHealth.php:38
-msgid "Max space"
-msgstr "Maks. plass"
+#: src/SiteHealth.php:200
+msgctxt "Site Health Info"
+msgid "Max disk space"
+msgstr "Maks. diskplass"
 
-#: src/SiteHealth.php:36
-msgid "Disk Space"
-msgstr "Lagringsplass"
+#: src/SiteHealth.php:194
+msgctxt "Site Health Info"
+msgid " &ndash; Dead domains"
+msgstr " &ndash; Døde domener"
 
-#: src/SiteHealth.php:34
+#: src/SiteHealth.php:188
+msgctxt "Site Health Info"
+msgid " &ndash; Parked domains"
+msgstr " &ndash; Parkerte domener"
+
+#: src/SiteHealth.php:183 src/SiteHealth.php:189 src/SiteHealth.php:195
+msgctxt "Site Health Info list delimiter"
+msgid ", "
+msgstr ", "
+
+#: src/SiteHealth.php:182
+msgctxt "Site Health Info"
+msgid " &ndash; Addon domains"
+msgstr " &ndash; Tilleggsdomener"
+
+#: src/SiteHealth.php:176
+msgctxt "Site Health Info"
+msgid "Main domain"
+msgstr "Hoveddomene"
+
+#: src/SiteHealth.php:170
+msgctxt "Site Health Info"
+msgid " &ndash; Two Factor Authentication?"
+msgstr " &ndash; Tofaktor-autentisering?"
+
+#: src/SiteHealth.php:153
+msgctxt "Site Health Info"
+msgid " &ndash; User"
+msgstr " &ndash; Bruker"
+
+#: src/SiteHealth.php:147
+msgctxt "Site Health Info"
+msgid " &ndash; Version"
+msgstr " &ndash; Versjon"
+
+#: src/SiteHealth.php:141
+msgctxt "Site Health Info"
+msgid "Is on cPanel®?"
+msgstr "Er på cPanel®?"
+
+#: src/SiteHealth.php:62 src/SiteHealth.php:67 src/SiteHealth.php:72
+#: src/SiteHealth.php:77 src/SiteHealth.php:82 src/SiteHealth.php:87
+#: src/SiteHealth.php:93 src/SiteHealth.php:99 src/SiteHealth.php:105
+#: src/SiteHealth.php:116 src/SiteHealth.php:121 src/SiteHealth.php:132
+msgctxt "Site Health Info"
 msgid "Undefined"
 msgstr "Udefinert"
 
-#: src/SiteHealth.php:34
+#: src/SiteHealth.php:62 src/SiteHealth.php:67 src/SiteHealth.php:72
+#: src/SiteHealth.php:77 src/SiteHealth.php:82 src/SiteHealth.php:87
+#: src/SiteHealth.php:93 src/SiteHealth.php:99 src/SiteHealth.php:105
+#: src/SiteHealth.php:114 src/SiteHealth.php:121 src/SiteHealth.php:130
+msgctxt "Site Health Info"
+msgid "Disabled"
+msgstr "Slått av"
+
+#: src/SiteHealth.php:62 src/SiteHealth.php:67 src/SiteHealth.php:72
+#: src/SiteHealth.php:77 src/SiteHealth.php:82 src/SiteHealth.php:87
+#: src/SiteHealth.php:93 src/SiteHealth.php:99 src/SiteHealth.php:105
+#: src/SiteHealth.php:114 src/SiteHealth.php:121 src/SiteHealth.php:130
+msgctxt "Site Health Info"
 msgid "Enabled"
 msgstr "Slått på"
 
-#: src/SiteHealth.php:19
+#: src/SiteHealth.php:57
+msgctxt "Site Health Status - Usage status"
+msgid "ok"
+msgstr "ok"
+
+#: src/SiteHealth.php:56
+msgctxt "Site Health Status Label"
+msgid "Number of Processes"
+msgstr "Antall prosesser"
+
+#: src/SiteHealth.php:54
+msgctxt "Site Health Status Label"
+msgid "Physical Memory Usage"
+msgstr "Fysisk minnebruk"
+
+#: src/SiteHealth.php:53
+msgctxt "Site Health Status Label"
+msgid "I/O Usage"
+msgstr "Inn-/utdatabruk"
+
+#: src/SiteHealth.php:52
+msgctxt "Site Health Status Label"
+msgid "CPU Usage"
+msgstr "Prosessorbruk"
+
+#: src/SiteHealth.php:51
+msgctxt "Site Health Status Label"
+msgid "Entry Processes"
+msgstr "Innføringsprosesser"
+
+#: src/SiteHealth.php:50
+msgctxt "Site Health Status Label"
+msgid "MySQL® Disk Usage"
+msgstr "MySQL® diskbruk"
+
+#: src/SiteHealth.php:41
+msgctxt "Site Health Status Label"
+msgid "Email routing"
+msgstr "E-postruting"
+
+#: src/SiteHealth.php:35
+msgctxt "Site Health Info"
+msgid "Security"
+msgstr "Sikkerhet"
+
+#: src/SiteHealth.php:29
+msgctxt "Site Health Status Label"
 msgid "Disk usage"
-msgstr "Lagringplass"
+msgstr "Diskbruk"
+
+#: src/SiteHealth.php:17
+msgctxt "Site Health Status"
+msgid "https://www.proisp.eu/guides/install-free-ssl-certificate-autossl/"
+msgstr "https://www.proisp.no/guider/installere-gratis-ssl-sertifikat-autossl/"
+
+#: src/RightNow.php:28
+msgctxt "At a Glance item"
+msgid "Your emails use %s."
+msgstr "Dine e-poster bruker %s."
+
+#: src/RightNow.php:108
+msgctxt "Plugin URI"
+msgid "https://wordpress.org/plugins/wf-cpanel-email-accounts/"
+msgstr "https://nb.wordpress.org/plugins/wf-cpanel-email-accounts/"
+
+#: src/RightNow.php:107
+msgctxt "Plugin Name"
+msgid "WebFacing – Email Accounts in cPanel®"
+msgstr "Nettvendt - E-postkonti i cPanel®"
+
+#: src/RightNow.php:100
+msgctxt "Plugin Name"
+msgid "WebFacing – Disk Usage from cPanel® on Dashboard &amp; in Site Health"
+msgstr "Nettvendt - Brukt lagringsplass fra cPanel® på Kontrollpanelet og i Nettstedshelse"
+
+#: src/SiteHealth.php:257
+msgctxt "Site Health Info - Number of emails per hour, %1$s = formatted number"
+msgid "%1$s per hour"
+msgstr "%1$s pr. time"
+
+#: src/SiteHealth.php:255
+msgctxt "Site Health"
+msgid "Maximum emails sending frequency"
+msgstr "Maksimal frekvens for sending av e-post"
+
+#: src/SiteHealth.php:232
+msgctxt "Site Health, %1$s = main domain"
+msgid "Local DNS for %1$s is authoritative?"
+msgstr "Lokal DNS for %1$s er autoritativ?"
+
+#: src/SiteHealth.php:159
+msgctxt "Site Health Info, %1$s = user"
+msgid " &ndash; User %1$s created"
+msgstr " &ndash; Bruker %1$s opprettet"
+
+#: src/RightNow.php:103
+msgctxt "%1$s = Plugin Name, %2$s = uri (also localize)"
+msgid "Also check out this complementary <a href=\"%2$s\">&laquo;%1$s&raquo;</a> plugin."
+msgstr "Prøv også denne utfyllende utvidelsen <a href=\"%2$s\">&laquo;%1$s&raquo;</a>."
+
+#: src/RightNow.php:97
+msgctxt "%1$s = Plugin Name,"
+msgid "Note from the author of the &laquo;%1$s&raquo; plugin:"
+msgstr "Merknad fra forfatteren av utvidelsen &laquo;%1$s&raquo;:"
 
 #: src/RightNow.php:67
+msgid "Your emails use %s."
+msgstr "Dine e-poster bruker %s."
+
+#: src/RightNow.php:71
+msgid "disk space used on cPanel®"
+msgstr "diskplass brukt på cPanel®"
+
+#: src/RightNow.php:34
+msgctxt "At a Glance - suffix for number for email accounts"
+msgid "email account used on cPanel®"
+msgid_plural "email accounts used on cPanel®"
+msgstr[0] "e-postkonto brukt på cPanel®"
+msgstr[1] "e-postkonti brukt på cPanel®"
+
+#: src/SiteHealth.php:433
+msgctxt "%1$s = email address/account"
+msgid "Email forwarding destination %1$s"
+msgstr "Videresendingsadresse for e-post %1$s"
+
+#: src/SiteHealth.php:411
+msgctxt "size: %1$s = used, %2$s = limit, %3$s = suspended/ok"
+msgid "%1$s of %2$s &ndash; %3$s"
+msgstr "%1$s av %2$s &ndash; %3$s"
+
+#: src/SiteHealth.php:362
+msgctxt "Site Health Status Description"
+msgid ""
+"Your server uses <strong>local</strong> delivery for this domain, but the mail exchange server for your domain is a remote one. The emails will therefore stay on this server and never be delivered where it should. WordPress admin emails will not work. Visitors submitting an email through a contact form in WordPress will not be received in your inbox.\n"
+"\n"
+"You are advised to set the Email Routing in cPanel® for <code>%1$s</code> to <strong>Remote Mail Exchanger</strong>."
+msgstr ""
+"Din server bruker <strong>lokal</strong> levering for dette domenet, men e-postutveksleren for ditt domene er ekstern. E-postene vil derfor forbli på denne serveren og aldri leveres dit de skal. Administrative e-poster fra WordPress vil ikke virke. Besøkende som sender inn en e-post via et kontaktskjema i WordPress vil ikke havne i din innboks.\n"
+"\n"
+"Du anbefales å sette e-postruting i cPanel® for <code>%1$s</code> til <strong>Ekstern postutveksler</strong>"
+
+#: src/SiteHealth.php:349
+msgctxt "Site Health Status Desription"
+msgid "When sending mail from a server to a hosted/known domain that has its mail exchange (MX) on another server it's crucial that it uses remote delivery by SMTP, and not just dropping it in the domain's local mailbox."
+msgstr "Ved sending av e-post fra en server til en betjent/kjent domene som har sin e-postserver (MX) på en annen server er det avgjørende at den bruker fjernlevering over SMTP og ikke bare dropper den i domenets lokale e-postboks."
+
+#: src/SiteHealth.php:138
+msgctxt "Site Health Info label"
+msgid "Your cPanel® Server &amp; Disk Space"
+msgstr "Din cPanel®-server og Diskplass"
+
+#: src/SiteHealth.php:384
+msgctxt "%1$s = used, %2$s = limit, %3$s = ok or error message."
+msgid "%1$s of %2$s &ndash; %3$s"
+msgstr "%1$s av %2$s &ndash; %3$s"
+
+#: src/RightNow.php:59 src/RightNow.php:90
+msgid "N/A"
+msgstr "I/T"
+
+#: src/RightNow.php:61
+msgid "Your databases use %s."
+msgstr "Dine databaser bruker %s,"
+
+#. Description of the plugin
+msgid "🕸️ By WebFacing. Shows your disk usage information, used and max allowed, plus alerts, in your admin Dashboard At a Glance widget and as test and info in Site Health tabs, including space used by your media uploads and cPanel® mail accounts. Also adds a Email Routing and a HTTPS only test to Site Health. Made with great help from PRO ISP AS, Norway."
+msgstr "🕸️ Av Nettvendt. Viser diskbruk-informasjon, brukt og maks, og varsler i din admin Kontrollpanel Oversikt-widget, og tester og info på Nettstedshelse-panelene, inkludert plass brukt av dine media-opplastinger og cPanel® e-postkonti. Legger også til en Kun HTTPS-test i Nettstedshelse. Laget med hjelp fra PRO ISP og cPanel®."
+
+#. Plugin Name of the plugin
+msgid "WebFacing - Disk Usage from cPanel® on Dashboard & in Site Health"
+msgstr "Nettvendt - Brukt lagringsplass fra cPanel® på Kontrollpanelet og i Nettstedshelse"
+
+#: src/SiteHealth.php:334
+msgid "Opens in a new tab."
+msgstr "Åpnes i en ny fane."
+
+#: src/SiteHealth.php:333
+msgctxt "Site Health Status"
+msgid "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
+msgstr "https://stackoverflow.com/questions/4083221/how-to-redirect-all-http-requests-to-https"
+
+#: src/SiteHealth.php:328
+msgctxt "Site Health Status"
+msgid "This situation can and should be fixed by forwarding all http requests to a https version of the requested URL. See link below."
+msgstr "Denne situasjonen kan rettes opp ved å videresende alle http-forespørsler til en https-versjon av den forspurte URL. Se lenke nedenfor."
+
+#: src/SiteHealth.php:320
+msgctxt "Site Health Status Description"
+msgid "You should ensure that visitors to your web site always use a secure connection. When visitors use an insecure connection it can be because used an old link or bookmark, or just typed in the domain. Using https instead of https means that communications between your browser and a website is encrypted via the use of TLS (Transport Layer Security). Even if your website doesn't handle sensitive data, it's a good idea to make sure your website always loads securely over https."
+msgstr "Du bør sørge for at besøkende til ditt nettsted alltid bruker en sikker tilkobling. Når besøkende bruker en usikker forbindelse kan det være fordi de brukte en gammel lenke eller bokmerke, eller de bare skrev inn vertsnavnet. Å bruke https i stedet for http betyr at kommunikasjonen mellom nettleseren og nettstedet er kryptert ved bruk av TLS (TransportLagSikkerhet). Selv om ditt nettsted ikke behandler følsomme opplysninger, er det en god ide å sørge for at ditt nettsted alltid lastes sikkert over https."
+
+#: src/SiteHealth.php:307
+msgctxt "Site Health Info"
+msgid "Immediate action is necessary to keep normal site behaviour, and to allow for new content."
+msgstr "Strakstiltak er nødvendig for å sikre normal oppførsel av nettstedet og plass til nytt innhold."
+
+#: src/SiteHealth.php:300
+msgctxt "Site Health Info"
+msgid "You are advised to inspect your server or consult your host for further advice or upgrade."
+msgstr "Du anbefales å undersøke din server eller søke råd hos din nettvert eller oppgradering."
+
+#: src/SiteHealth.php:292
+msgctxt "Site Health Info Test Description"
+msgid "In internet services providing (ISPs) or pure web hosting, disk space is the amount of space actually used or available on the server for storing the content of your site. This content includes posts, pages, images, videos, logs, other files, preferences, settings, configurations, and whatever else stored on as files or in databases. In case a full ISP, it is also used to store emails, including their full content and attachments. The amount of used disk space tend to grow over time.</p><p>The maximum amount depend on the subscribed package or plan typically from 1GB to over 100GB. When your available disk space is exhausted, your site may break or fail in strange, unpredictable ways. Deleting redundant temporary files and oher \"garbage\" may rectify it short term. Upgrading your plan/package/account is a more sustainable solution.</p><p>Disk space used is %1$s out of %2$s available. Your uploaded media files takes up %3$s."
+msgstr "Hos leverandører av internett-tjenester (ISP-er) eller rene webhoteller er diskplass den mengden plass brukt eller tilgjengelig på serveren for lagring av innholdet på ditt nettsted. Dette innholdet inkluderer innlegg, sider, bilder, videoer, logger, andre filer, preferanser, innstillinger og alt annet som er lagret som filler eller i databaser. I tilfelle en fullverdig ISP, brukes den også til å lagre e-poster, inkludert deres fulle innhold og vedlegg. Mengden brukt diskplass har en tendens til å vokse med tiden.</p><p>Den maksimale plassen avhenger av abonnemenstpakken eller kontoen, typisk fra 1GB til over 100GB. Når din tilgjengelige diskplass er oppbrukt vil ditt nettsted kunne feile på rare og uforutsigelige måter. Å slette overflødige, midlertidige filer og annet \"søppel\" kan rette problemet på kort sikt. Å oppgradere tit abonnement eller din konto er en mer varig løsning.</p><p>Diskplass brukt er %1$s av %2$s tilgjengelig. Dine opplastede mediefiler opptar %3$s."
+
+#: src/SiteHealth.php:142 src/SiteHealth.php:171 src/SiteHealth.php:238
+#: src/SiteHealth.php:244 src/SiteHealth.php:250 src/SiteHealth.php:274
+msgid "No"
+msgstr "Nei"
+
+#: src/SiteHealth.php:142 src/SiteHealth.php:171 src/SiteHealth.php:238
+#: src/SiteHealth.php:244 src/SiteHealth.php:250 src/SiteHealth.php:274
+msgid "Yes"
+msgstr "Ja"
+
+#: src/RightNow.php:92
 msgid "Hosted at <a href=\"%1$s\">%2$s</a>."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a>."
 
-#: src/RightNow.php:65
+#: src/RightNow.php:90
 msgid "Hosted at <a href=\"%1$s\">%2$s</a> using a <strong>%3$s</strong> account with %4$s."
 msgstr "Betjent på <a href=\"%1$s\">%2$s</a> med en <strong>%3$s</strong>-konto med %4$s."
 
-#: src/RightNow.php:55
-msgid "Unknown"
-msgstr "Ukjent"
-
-#: src/RightNow.php:45
-msgid "disk space used"
-msgstr "lagringsplass brukt"
-
-#: src/RightNow.php:37
+#: src/RightNow.php:64
 msgid "Your uploaded files use %s."
-msgstr "Dine opplastede filer bruker %s."
+msgstr "Dine opplastede filer utgjør %s."
 
-#: src/RightNow.php:31
+#: src/RightNow.php:55
 msgid "Maximum allowed for your account %1$s: %2$s."
 msgstr "Maksimalt tillatt for din konto %1$s: %2$s."
 
